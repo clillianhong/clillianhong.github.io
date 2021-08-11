@@ -2,8 +2,6 @@ import React, { useRef, Suspense, useMemo, useEffect, hover, useLayoutEffect } f
 import * as THREE from 'three'
 import { extend, Canvas, useThree, useFrame } from '@react-three/fiber'
 
-import Clownfish from './Fish/ClownFish'
-
 function Swarm({ count, mouse, particle, matColor }) {
     const mesh = useRef()
     const light = useRef()
