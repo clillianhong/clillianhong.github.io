@@ -56,7 +56,7 @@ const Ocean = (props) => {
                     counts={[100, 1]}
                     colors={["#000000", "#FF0000"]} />
                 <FishSwarm count={20} mouse={mouse} speedfactor={0.04} forwardVector={new THREE.Vector3(0, 0, 1)} scale={12} path={'./models/angelfish.gltf'} geo={'13009_Coral_Beauty_Angelfish_v1_l3'} mat={'13009_Coral_Beauty_Angelfish_v1'} />
-                <FishSwarm count={30} mouse={mouse} speedfactor={0.1} forwardVector={new THREE.Vector3(-1, 0, 0)} scale={0.8} path={'./models/clownfish.gltf'} geo={'12265_Fish_v1_L2'} mat={'01___12265_Fish'} />
+                <FishSwarm count={30} mouse={mouse} speedfactor={0.1} forwardVector={new THREE.Vector3(-1, 0, 0)} scale={0.8} path={'https://github.com/clillianhong/hello/blob/master/public/models/clownfish.gltf'} geo={'12265_Fish_v1_L2'} mat={'01___12265_Fish'} />
                 <FishSwarm count={10} mouse={mouse} speedfactor={0.1} forwardVector={new THREE.Vector3(0, 0, 1)} scale={5} path={'./models/bluegreenfish.gltf'} geo={'13007_Blue-Green_Reef_Chromis_v2_l3'} mat={'13007_Blue_Green_Reef_Chromis_v1'} />
                 < OrbitCam />
                 <Swarm count={100} mouse={mouse} particle={<dodecahedronBufferGeometry attach="geometry" args={[0.2, 0]} />} matColor={'#31d67e'} />
