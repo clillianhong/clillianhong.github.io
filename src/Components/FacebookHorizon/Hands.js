@@ -19,7 +19,7 @@ function Hands(props) {
     return (
         <mesh
             layers={1}
-            onClick={(event) => console.log('clicked!!!')}
+            onClick={(event) => window.open('https://www.oculus.com/facebook-horizon/')}
             ref={mesh}>
             <primitive layers={1} object={gltf.scene} />
         </mesh>
