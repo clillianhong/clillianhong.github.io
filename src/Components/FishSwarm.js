@@ -1,11 +1,7 @@
 import React, { useRef, Suspense, useMemo, useEffect, hover, useLayoutEffect, useState } from 'react'
 import * as THREE from 'three'
 import { extend, Canvas, useThree, useFrame } from '@react-three/fiber'
-
 import { useGLTF } from '@react-three/drei'
-
-import { Quaternion } from 'three'
-
 
 const FishSwarm = ({ count, mouse, speedfactor, scale, forwardVector, path, geo, mat }) => {
     const distanceFactor = 100;
