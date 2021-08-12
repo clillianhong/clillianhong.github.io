@@ -8,7 +8,7 @@ const App = () => (
       <div>
         {/* <NavBar /> */}
         <Switch>
-          <Route exact path="/hello/" component={LandingPage} />
+          <Route exact path="/" component={LandingPage} />
         </Switch>
       </div>
     </BrowserRouter>
