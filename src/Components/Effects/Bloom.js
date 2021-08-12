@@ -1,6 +1,8 @@
 import React, { useRef, Suspense, useMemo, useEffect, useCallback, set } from 'react'
 import * as THREE from 'three'
 import { extend, Canvas, useThree, useFrame } from '@react-three/fiber'
+import { Effects } from '@react-three/drei'
+extend({ Effects })
 
 export function BloomEffect({ layer }) {
     const bloomComposer = useRef()
