@@ -80,7 +80,7 @@ function Airplane(props) {
                 onPointerOut={() => {
                     stop = false
                 }}
-                onClick={(event) => window.open("https://stackoverflow.com/questions/13071967/adding-an-onclick-function-to-go-to-url-in-javascript")}
+                onClick={(event) => window.open(process.env.PUBLIC_URL + "/lillianhong_resume.pdf")}
                 ref={mesh}>
                 <primitive layers={1} object={gltf.scene} />
 
