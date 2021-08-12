@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 function Thonker(props) {
 
-    const gltf = useLoader(GLTFLoader, './models/thonker.gltf')
+    const gltf = useLoader(GLTFLoader, process.env.PUBLIC_URL + '/models/thonker.gltf')
     // This reference will give us direct access to the mesh
     const mesh = useRef()
 

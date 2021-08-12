@@ -26,7 +26,7 @@ const NavBar = props => {
                     <ul className="flex flex-row items-center space-x-10 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-500">
 
                         <li id="home">
-                            <div className="font-mono font-extrabold	 hover:text-white text-transparent" onClick={() => setDefaultTab(PageType.HOME)} onMouseEnter={() => onMouseEnter(PageType.HOME)} onMouseLeave={resetChosenTab}>
+                            <div className="font-mono font-extrabold hover:text-white text-transparent" onClick={() => setDefaultTab(PageType.HOME)} onMouseEnter={() => onMouseEnter(PageType.HOME)} onMouseLeave={resetChosenTab}>
                                 home
                         </div>
                         </li>

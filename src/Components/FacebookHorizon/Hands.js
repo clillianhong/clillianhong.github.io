@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 function Hands(props) {
 
-    const gltf = useLoader(GLTFLoader, './models/cuppedhands.gltf')
+    const gltf = useLoader(GLTFLoader, process.env.PUBLIC_URL + '/models/cuppedhands.gltf')
     // This reference will give us direct access to the mesh
     const mesh = useRef()
     // Set up state for the hovered and active state

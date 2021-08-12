@@ -6,7 +6,7 @@ import * as THREE from 'three'
 
 function Airplane(props) {
 
-    const gltf = useLoader(GLTFLoader, './models/paperairplane.gltf')
+    const gltf = useLoader(GLTFLoader, process.env.PUBLIC_URL + '/models/paperairplane.gltf')
     // This reference will give us direct access to the mesh
     const mesh = useRef()
     // Set up state for the hovered and active state

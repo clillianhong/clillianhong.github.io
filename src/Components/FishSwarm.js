@@ -6,21 +6,6 @@ import { useGLTF } from '@react-three/drei'
 
 import { Quaternion } from 'three'
 
-export const BigSwarm = ({ count, mouse }) => {
-
-
-
-    const { clownNodes, clownMaterials } = useGLTF('/models/clownfish.gltf')
-    const [clownNode, setClownNode] = useState(clownNodes)
-    const [clownMaterial, setClownMaterial] = useState(clownMaterials)
-    const { greenNodes, greenMaterials } = useGLTF('/models/bluegreenfish.gltf')
-    const { angelNodes, angelMaterials } = useGLTF('/models/angelfish.gltf')
-
-    return (
-        <FishSwarm count={count} mouse={mouse} geo={clownNode} mat={clownMaterial} />
-    )
-
-}
 
 const FishSwarm = ({ count, mouse, speedfactor, scale, forwardVector, path, geo, mat }) => {
     const distanceFactor = 100;

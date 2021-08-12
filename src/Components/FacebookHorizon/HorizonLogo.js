@@ -6,7 +6,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 function HorizonLogo(props) {
     const mesh = useRef()
     // This reference will give us direct access to the mesh
-    const logo = useLoader(GLTFLoader, './models/horizonlogo.gltf')
+    const logo = useLoader(GLTFLoader, process.env.PUBLIC_URL + '/models/horizonlogo.gltf')
     // Set up state for the hovered and active state
     const [hovered, setHover] = useState(false)
     const [active, setActive] = useState(false)
