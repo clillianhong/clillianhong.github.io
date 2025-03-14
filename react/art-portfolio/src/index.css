@@ -1,6 +1,22 @@
+@config "../../tailwind.config.js";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+
+:root {
+  --primary-color: #3498db;
+  --menu-color: #9CAB9E;
+  --menu-text-color: #ffffff;
+  --background-color: #f9f9f9;
+  --text-color: #333;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Crimson Text', 'Oxygen', -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI', 'Roboto',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
