@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import GameMuseum from '../components/GameMuseum';
+
+import { IsMobileContext } from '../App';
+import { UnloadGameContext } from '../App';
 
 const HomePage: React.FC = () => {
+  // const isMobile = React.useContext(IsMobileContext);
+  // const [showMuseum, setShowMuseum] = React.useState<boolean>(true);
+  // const {unloadGame, setUnloadGame} = React.useContext(UnloadGameContext);
   return (
     <div style={{ textAlign: 'center', padding: '50px' }}>
-      <h1>Welcome to Our Website</h1>
-      <p>Your one-stop solution for all your needs.</p>
-      <button style={{ padding: '10px 20px', fontSize: '16px' }}>Get Started</button>
+      <h2 style={{color: 'red' }}> this website is under construction, but feel free to look around </h2>
+      <h2>Pan with mouse, navigate with arrow keys: </h2>
+       <GameMuseum />
     </div>
   );
 };

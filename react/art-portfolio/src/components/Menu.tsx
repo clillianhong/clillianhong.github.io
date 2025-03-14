@@ -1,10 +1,11 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect, createContext, useContext} from 'react';
 import { Drawer, List, ListItem, ListItemText } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AboutMe from './AboutMe';
 import { IconButton } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { UnloadGameContext } from '../App';
 
 const DESKTOP_WIDTH = 768;
 const MOBILE_WIDTH = 200;
@@ -13,12 +14,15 @@ const DESKTOP_MENU_WIDTH = 400;
 const MOBILE_MENU_WIDTH = 100;
 
 const MOBILE_FONT_SIZE = 23;
-const DESKTOP_FONT_SIZE = 40;
+const DESKTOP_FONT_SIZE = 30;
+
 
 
 function Menu({ onWidthChange }: { onWidthChange: (width: number) => void }) {
   const [selectedItem, setSelectedItem] = useState('home');
   const [content, setContent] = useState(<div>Welcome to Home!</div>);
+  const { unloadGame, setUnloadGame } = useContext(UnloadGameContext);
+
     type VariantType = "persistent" | "temporary" | "permanent" | undefined;
     const [open, setOpen] = useState(true);
 
@@ -26,6 +30,7 @@ function Menu({ onWidthChange }: { onWidthChange: (width: number) => void }) {
     setIsToggling(true);
     setOpen(!open);
   };
+
 
   const [variant, setVariant] = useState<VariantType>(window.innerWidth > DESKTOP_WIDTH ? "persistent" : "temporary");
   const [width, setWidth] = useState(window.innerWidth < DESKTOP_WIDTH ? MOBILE_MENU_WIDTH : DESKTOP_MENU_WIDTH);
@@ -78,6 +83,7 @@ useEffect(() => {
     onWidthChange(open ? width: 0);
   }, [open, width, onWidthChange]);
 
+
   return (
       <div style={{backgroundColor: 'var(--menu-color)'}}>
         {/* <button ref={toggleButtonRef} onClick={handleDrawerToggle}> </button> */}
@@ -118,11 +124,22 @@ useEffect(() => {
               <ListItemText primary="home"/ >
             </Link>
           </ListItem>
-          <ListItem key="about">
+          {/* <ListItem key="about">
             <Link to="/projects">
-              <ListItemText primary="projects" />
+              <ListItemText primary="projects" onClick={unloadGame}/>
             </Link>
+          </ListItem> */}
+          <ListItem key="external">
+            <a href="https://www.instagram.com/c.lillianhong/" target="_blank" rel="noopener noreferrer">
+              <ListItemText primary="instagram"/>
+            </a>
           </ListItem>
+          <ListItem key="external">
+            <a href="https://www.linkedin.com/in/lillian-hong-69506b176/" target="_blank" rel="noopener noreferrer">
+              <ListItemText primary="linkedin"/>
+            </a>
+          </ListItem>
+
         </List>
       </Drawer>
       </div>
