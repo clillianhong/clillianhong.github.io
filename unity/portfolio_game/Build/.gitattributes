@@ -1,0 +1,2 @@
+portfolio_game.data filter=lfs diff=lfs merge=lfs -text
+portfolio_game.wasm filter=lfs diff=lfs merge=lfs -text
