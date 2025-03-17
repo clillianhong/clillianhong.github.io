@@ -4,19 +4,22 @@ interface AboutMeProps {
   menuWidth: number;
 }
 
-const MOBILE_FONT_SIZE = 10;
-const DESKTOP_FONT_SIZE = 13;
+const MOBILE_PADDING_RATIO = 0.05;
+const DESKTOP_PADDING_RATIO = 0.02;
+
+const MOBILE_FONT_SIZE_RATIO = 0.025;
+const DESKTOP_FONT_SIZE_RATIO = 0.01;
 
 const AboutMe: React.FC<AboutMeProps> = ({ menuWidth }) => {
   const [dynamicPadding, setDynamicPadding] = React.useState(20);
-  const [fontSize, setFontSize] = React.useState(DESKTOP_FONT_SIZE);
+  const [fontSize, setFontSize] = React.useState(window.innerWidth * DESKTOP_FONT_SIZE_RATIO);
 
   React.useEffect(() => {
     const handleResize = () => {
-      const newPadding = window.innerWidth < 600 ? 5 : 20;
+      const newPadding = window.innerWidth < 600 ? window.innerWidth * MOBILE_PADDING_RATIO : window.innerWidth * DESKTOP_PADDING_RATIO;
       setDynamicPadding(newPadding);
 
-      const newFontSize = window.innerWidth < 600 ? MOBILE_FONT_SIZE : DESKTOP_FONT_SIZE;
+      const newFontSize = window.innerWidth < 600 ? window.innerWidth *  MOBILE_FONT_SIZE_RATIO: window.innerWidth * DESKTOP_FONT_SIZE_RATIO;
       setFontSize(newFontSize);
     };
 

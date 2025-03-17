@@ -13,11 +13,12 @@ const MOBILE_WIDTH = 200;
 // const DESKTOP_MENU_WIDTH = 400;
 // const MOBILE_MENU_WIDTH = 100;
 
-const DESKTOP_MENU_WIDTH_SCALE = 0.15;
+const DESKTOP_MENU_WIDTH_SCALE = 0.3;
 const MOBILE_MENU_WIDTH_SCALE = 0.3;
 
-const MOBILE_FONT_SIZE = 15;
-const DESKTOP_FONT_SIZE = 20;
+
+const MOBILE_FONT_SIZE_SCALE = 0.03;
+const DESKTOP_FONT_SIZE_SCALE = 0.015;
 
 
 
@@ -36,8 +37,8 @@ function Menu({ onWidthChange }: { onWidthChange: (width: number) => void }) {
 
 
   const [variant, setVariant] = useState<VariantType>(window.innerWidth > DESKTOP_WIDTH ? "persistent" : "temporary");
-  const [width, setWidth] = useState(window.innerWidth < DESKTOP_WIDTH ? window.innerWidth * DESKTOP_MENU_WIDTH_SCALE : window.innerWidth * MOBILE_MENU_WIDTH_SCALE);
-  const [fontSize, setFontSize] = React.useState(DESKTOP_FONT_SIZE);
+  const [width, setWidth] = useState(window.innerWidth < DESKTOP_WIDTH ?  window.innerWidth * MOBILE_MENU_WIDTH_SCALE: window.innerWidth * DESKTOP_MENU_WIDTH_SCALE);
+  const [fontSize, setFontSize] = React.useState(window.innerWidth < DESKTOP_WIDTH ?  window.innerWidth * MOBILE_FONT_SIZE_SCALE : window.innerWidth * DESKTOP_FONT_SIZE_SCALE);
   const toggleButtonRef = React.createRef<HTMLButtonElement>();
   const [isToggling, setIsToggling] = useState(false);
 
@@ -45,12 +46,14 @@ function Menu({ onWidthChange }: { onWidthChange: (width: number) => void }) {
     const handleResize = () => {
       if (window.innerWidth > DESKTOP_WIDTH) {
         setVariant("persistent" as const);
+        console.log("setting width to: " + window.innerWidth * MOBILE_MENU_WIDTH_SCALE);
         setWidth(window.innerWidth * DESKTOP_MENU_WIDTH_SCALE);
-        setFontSize(DESKTOP_FONT_SIZE);
+        setFontSize(window.innerWidth * DESKTOP_FONT_SIZE_SCALE);
       } else {
         setVariant("temporary" as const);
+        console.log("setting width to: " + window.innerWidth * MOBILE_MENU_WIDTH_SCALE);
         setWidth(window.innerWidth * MOBILE_MENU_WIDTH_SCALE);
-        setFontSize(MOBILE_FONT_SIZE);
+        setFontSize(window.innerWidth * MOBILE_FONT_SIZE_SCALE);
       }
     };
     window.addEventListener('resize', handleResize);
@@ -89,7 +92,7 @@ useEffect(() => {
 
   return (
       <div style={{backgroundColor: 'var(--menu-color)'}}>
-        
+
       <IconButton onClick={handleDrawerToggle} ref={toggleButtonRef} sx={{ position: 'absolute', top: width*0.2 / 2, left: open ? width + width*0.2 / 2: width*0.2 / 2 , width: width*0.2, height: width*0.2, backgroundColor: 'var(--menu-color)', zIndex: 10 }}>
         {open ? <ChevronLeftIcon sx={{width: width*0.2, height: width*0.2,}}/> : <ChevronRightIcon sx={{width: width*0.2, height: width*0.2,}}/>}
       </IconButton>
