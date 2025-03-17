@@ -49,7 +49,7 @@ const Layout = ({children} : LayoutProps) => {
   }
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: `${menuWidth}px 1fr` }}>
+    <div style={{ display: 'grid', gridTemplateColumns: `${menuWidth}px 1fr`, }}>
       <IsMobileContext.Provider value={isMobile}>
       <UnloadGameContext.Provider value={{unloadGame, setUnloadGame}}>
         <Menu onWidthChange={(width) => handleResize(width)} />
@@ -71,7 +71,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
     <BrowserRouter>
-    <div className="App" >
+    <div className="App">
       <Layout>
         <Routes>
           <Route path="/" element={<HomePage/>} />

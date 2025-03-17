@@ -10,11 +10,14 @@ import { UnloadGameContext } from '../App';
 const DESKTOP_WIDTH = 768;
 const MOBILE_WIDTH = 200;
 
-const DESKTOP_MENU_WIDTH = 400;
-const MOBILE_MENU_WIDTH = 100;
+// const DESKTOP_MENU_WIDTH = 400;
+// const MOBILE_MENU_WIDTH = 100;
 
-const MOBILE_FONT_SIZE = 23;
-const DESKTOP_FONT_SIZE = 30;
+const DESKTOP_MENU_WIDTH_SCALE = 0.15;
+const MOBILE_MENU_WIDTH_SCALE = 0.3;
+
+const MOBILE_FONT_SIZE = 15;
+const DESKTOP_FONT_SIZE = 20;
 
 
 
@@ -33,7 +36,7 @@ function Menu({ onWidthChange }: { onWidthChange: (width: number) => void }) {
 
 
   const [variant, setVariant] = useState<VariantType>(window.innerWidth > DESKTOP_WIDTH ? "persistent" : "temporary");
-  const [width, setWidth] = useState(window.innerWidth < DESKTOP_WIDTH ? MOBILE_MENU_WIDTH : DESKTOP_MENU_WIDTH);
+  const [width, setWidth] = useState(window.innerWidth < DESKTOP_WIDTH ? window.innerWidth * DESKTOP_MENU_WIDTH_SCALE : window.innerWidth * MOBILE_MENU_WIDTH_SCALE);
   const [fontSize, setFontSize] = React.useState(DESKTOP_FONT_SIZE);
   const toggleButtonRef = React.createRef<HTMLButtonElement>();
   const [isToggling, setIsToggling] = useState(false);
@@ -42,11 +45,11 @@ function Menu({ onWidthChange }: { onWidthChange: (width: number) => void }) {
     const handleResize = () => {
       if (window.innerWidth > DESKTOP_WIDTH) {
         setVariant("persistent" as const);
-        setWidth(DESKTOP_MENU_WIDTH);
+        setWidth(window.innerWidth * DESKTOP_MENU_WIDTH_SCALE);
         setFontSize(DESKTOP_FONT_SIZE);
       } else {
         setVariant("temporary" as const);
-        setWidth(MOBILE_MENU_WIDTH);
+        setWidth(window.innerWidth * MOBILE_MENU_WIDTH_SCALE);
         setFontSize(MOBILE_FONT_SIZE);
       }
     };
@@ -86,8 +89,8 @@ useEffect(() => {
 
   return (
       <div style={{backgroundColor: 'var(--menu-color)'}}>
-        {/* <button ref={toggleButtonRef} onClick={handleDrawerToggle}> </button> */}
-      <IconButton onClick={handleDrawerToggle} ref={toggleButtonRef} sx={{ position: 'absolute', top: width*0.2 / 2, left: open ? width + width*0.2 / 2: width*0.2 / 2 , width: width*0.2, height: width*0.2, backgroundColor: 'var(--menu-color)' }}>
+        
+      <IconButton onClick={handleDrawerToggle} ref={toggleButtonRef} sx={{ position: 'absolute', top: width*0.2 / 2, left: open ? width + width*0.2 / 2: width*0.2 / 2 , width: width*0.2, height: width*0.2, backgroundColor: 'var(--menu-color)', zIndex: 10 }}>
         {open ? <ChevronLeftIcon sx={{width: width*0.2, height: width*0.2,}}/> : <ChevronRightIcon sx={{width: width*0.2, height: width*0.2,}}/>}
       </IconButton>
 
@@ -103,7 +106,6 @@ useEffect(() => {
             width: {width},
             boxSizing: 'border-box',
             fontSize: fontSize, // Set the font size here
-            paddingTop: width / 9, // Added padding to the top
             backgroundColor: 'var(--menu-color)'
           },
           backgroundColor: 'var(--menu-color)'
@@ -113,7 +115,6 @@ useEffect(() => {
         <List style={{backgroundColor: 'var(--menu-color', height: '100%'}} sx={{ '& .MuiListItemText-primary': {
              fontSize: fontSize,
              color: 'var(--menu-text-color)'
-
              },
              '& a': {
                     textDecorationColor: 'var(--menu-text-color)' // or any other color value
@@ -124,17 +125,17 @@ useEffect(() => {
               <ListItemText primary="home"/ >
             </Link>
           </ListItem>
-          {/* <ListItem key="about">
+          <ListItem key="projects">
             <Link to="/projects">
-              <ListItemText primary="projects" onClick={unloadGame}/>
+              <ListItemText primary="projects"/>
             </Link>
-          </ListItem> */}
-          <ListItem key="external">
+          </ListItem>
+          <ListItem key="external_insta">
             <a href="https://www.instagram.com/c.lillianhong/" target="_blank" rel="noopener noreferrer">
               <ListItemText primary="instagram"/>
             </a>
           </ListItem>
-          <ListItem key="external">
+          <ListItem key="external_linked">
             <a href="https://www.linkedin.com/in/lillian-hong-69506b176/" target="_blank" rel="noopener noreferrer">
               <ListItemText primary="linkedin"/>
             </a>
