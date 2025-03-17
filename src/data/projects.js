@@ -35,12 +35,12 @@ const data = [
           + ' and unknown future. A silent short story.',
     },
     {
-        title: 'The good love the mountains, the wise love the sea.',
+        title: 'The wise love the sea; the virtuous love the mountains',
         subtitle: 'Illustration | Digital + Risograph printed',
         image: '/project_title_cards/illustrations/confucius_folding.png',
         date: '2025-3-20',
         desc:
-          'TODO.',
+          "Depicted on the back of these six screen-folding bookmarks is a poem from Confucius's Analects: 'The wise love the sea; the virtuous love the mountains // The wise are restless; the virtuous are rooted // The wise are happy; the virtuous long lived. '" 
     },
     {
         title: 'Porcelain Doll',
@@ -50,6 +50,14 @@ const data = [
         desc:
           'Concept cover art for a future comic about a porcelain doll. Features the traditional'
           + ' qinghua color palette of cobalt blue on white glaze, the most iconic chinese porcelain style.',
+    },
+    {
+        title: 'Poeny Dream',
+        subtitle: 'Illustration | Digital',
+        image: '/project_title_cards/illustrations/mudan_boy.png',
+        date: '2022-8-20',
+        desc:
+          'Peony study with an old OC',
     }
 
 ];

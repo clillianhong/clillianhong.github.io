@@ -120,14 +120,14 @@ useEffect(() => {
                     textDecorationColor: 'var(--menu-text-color)' // or any other color value
                 }
              }} > {/* Set the font size here */}
-          <ListItem key="home" >
-             <Link to="/">
-              <ListItemText primary="home"/ >
+          <ListItem key="art-portfolio">
+            <Link to="/">
+              <ListItemText primary="art portfolio"/>
             </Link>
           </ListItem>
-          <ListItem key="projects">
-            <Link to="/projects">
-              <ListItemText primary="projects"/>
+          <ListItem key="code-monkey">
+            <Link to="/code">
+              <ListItemText primary="code monkey business"/>
             </Link>
           </ListItem>
           <ListItem key="external_insta">

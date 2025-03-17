@@ -3,8 +3,9 @@ import './App.css';
 import Menu from './components/Menu';
 import HomePage from './pages/HomePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import ProjectsPage from './pages/ProjectsPage';
+import PortfolioPage from './pages/ArtPortfolioPage';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CodeProjectsPage from './pages/CodeProjectPage';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -74,26 +75,10 @@ function App() {
     <div className="App">
       <Layout>
         <Routes>
-          <Route path="/" element={<HomePage/>} />
-          <Route path="/projects" element={<ProjectsPage/>} />
+          <Route path="/" element={<PortfolioPage/>} />
+          <Route path="/code" element={<CodeProjectsPage/>} />
         </Routes>
       </Layout>
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-
-
-      </header> */}
     </div>
     </BrowserRouter>
     </ThemeProvider>

@@ -2327,8 +2327,8 @@ dl dd {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  background: #a4b3a6;
-  border: solid 1px rgba(160, 160, 160, 0.3);
+  background: #edeee5;
+  /* border: solid 1px rgba(160, 160, 160, 0.3); */
   margin: 0 0 2em;
 }
 .mini-post .image {
