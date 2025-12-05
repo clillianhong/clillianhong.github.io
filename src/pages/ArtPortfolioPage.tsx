@@ -1,5 +1,5 @@
 import React from 'react';
-import Hero from '../components/Hero';
+import PortalHero from '../components/PortalHero';
 import ProjectCard from '../components/ProjectCard';
 import Footer from '../components/Footer';
 import data from '../data/projects';
@@ -7,9 +7,16 @@ import data from '../data/projects';
 const ArtPortfolioPage: React.FC = () => {
   return (
     <>
-      <Hero />
+      <PortalHero />
       
-      <section className="section" style={{ background: 'var(--color-cream-warm)' }}>
+      <section 
+        className="section" 
+        style={{ 
+          background: 'var(--color-cream-warm)',
+          position: 'relative',
+          zIndex: 1,
+        }}
+      >
         <div className="container">
           <header className="section__header">
             <h2 className="section__title">Illustrations & Comics</h2>
