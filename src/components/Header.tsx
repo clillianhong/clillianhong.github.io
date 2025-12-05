@@ -2,27 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Header: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
 
+  // Close sidebar on route change
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
+    setIsSidebarOpen(false);
   }, [location]);
 
-  // Prevent body scroll when mobile menu is open
+  // Prevent body scroll when sidebar is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
+    if (isSidebarOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -30,117 +20,98 @@ const Header: React.FC = () => {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isMobileMenuOpen]);
+  }, [isSidebarOpen]);
 
-  // Close menu on escape key
+  // Close on escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
+      if (e.key === 'Escape' && isSidebarOpen) {
+        setIsSidebarOpen(false);
       }
     };
 
     window.addEventListener('keydown', handleEscape);
     return () => window.removeEventListener('keydown', handleEscape);
-  }, [isMobileMenuOpen]);
+  }, [isSidebarOpen]);
 
   const navLinks = [
     { to: '/', label: 'Art' },
     { to: '/code', label: 'Work' },
     { href: 'https://www.instagram.com/c.lillianhong/', label: 'Instagram' },
     { href: 'https://www.linkedin.com/in/lillian-hong-69506b176/', label: 'LinkedIn' },
+    { href: 'mailto:c.lillianhong@gmail.com', label: 'Contact' },
   ];
 
   return (
     <>
-      <header className={`header ${isScrolled ? 'header--scrolled' : ''}`}>
-        <div className="header__inner">
-          <Link to="/" className="header__logo">
-            Lillian Hong
-          </Link>
-
-          <nav className="header__nav">
-            {navLinks.map((link) =>
-              link.to ? (
-                <Link
-                  key={link.label}
-                  to={link.to}
-                  className={location.pathname === link.to ? 'active' : ''}
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {link.label}
-                </a>
-              )
-            )}
-          </nav>
-        </div>
-      </header>
-
-      {/* Hamburger button - positioned outside header for proper z-index stacking */}
+      {/* Hamburger button - always visible */}
       <button
-        className={`menu-toggle ${isMobileMenuOpen ? 'menu-toggle--open' : ''}`}
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-        aria-expanded={isMobileMenuOpen}
-        style={{
-          position: 'fixed',
-          top: '1rem',
-          right: '1.5rem',
-          zIndex: 110, // Above mobile menu (105)
-        }}
+        className={`menu-toggle ${isSidebarOpen ? 'menu-toggle--open' : ''}`}
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        aria-label={isSidebarOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={isSidebarOpen}
       >
         <span className="menu-toggle__line" />
         <span className="menu-toggle__line" />
         <span className="menu-toggle__line" />
       </button>
 
-      {/* Mobile Menu Overlay */}
+      {/* Backdrop overlay */}
       <div 
-        className={`mobile-menu ${isMobileMenuOpen ? 'mobile-menu--open' : ''}`}
-        onClick={(e) => {
-          // Close menu when clicking the background (not the links)
-          if (e.target === e.currentTarget) {
-            setIsMobileMenuOpen(false);
-          }
-        }}
+        className={`sidebar-backdrop ${isSidebarOpen ? 'sidebar-backdrop--open' : ''}`}
+        onClick={() => setIsSidebarOpen(false)}
+        aria-hidden="true"
+      />
+
+      {/* Sidebar navigation */}
+      <nav 
+        className={`sidebar ${isSidebarOpen ? 'sidebar--open' : ''}`}
+        aria-label="Main navigation"
       >
-        {navLinks.map((link) =>
-          link.to ? (
-            <Link key={link.label} to={link.to} onClick={() => setIsMobileMenuOpen(false)}>
-              {link.label}
-            </Link>
-          ) : (
-            <a
-              key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setIsMobileMenuOpen(false)}
+        <div className="sidebar__content">
+          {/* Logo/Name at top of sidebar */}
+          <div className="sidebar__header">
+            <Link 
+              to="/" 
+              className="sidebar__logo"
+              onClick={() => setIsSidebarOpen(false)}
             >
-              {link.label}
-            </a>
-          )
-        )}
-        
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            setIsMobileMenuOpen(false);
-            window.open('mailto:c.lillianhong@gmail.com', '_blank');
-          }}
-        >
-          Contact
-        </a>
-      </div>
+              Lillian Hong
+            </Link>
+          </div>
+
+          {/* Navigation links */}
+          <ul className="sidebar__nav">
+            {navLinks.map((link) => (
+              <li key={link.label} className="sidebar__nav-item">
+                {link.to ? (
+                  <Link 
+                    to={link.to} 
+                    onClick={() => setIsSidebarOpen(false)}
+                    className={location.pathname === link.to ? 'active' : ''}
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={link.href}
+                    target={link.href?.startsWith('mailto') ? undefined : '_blank'}
+                    rel={link.href?.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                    onClick={() => setIsSidebarOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          {/* Footer text */}
+          <div className="sidebar__footer">
+            <p>© {new Date().getFullYear()}</p>
+          </div>
+        </div>
+      </nav>
     </>
   );
 };

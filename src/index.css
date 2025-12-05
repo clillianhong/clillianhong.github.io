@@ -117,83 +117,12 @@ a {
 }
 
 /* ============================================
-   HEADER
+   HAMBURGER MENU BUTTON
    ============================================ */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  padding: 1rem 1.5rem;
-  transition: all var(--transition-smooth);
-}
-
-.header--scrolled {
-  background: rgba(248, 246, 241, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
-}
-
-.header__inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.header__logo {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: var(--color-ink);
-}
-
-.header__nav {
-  display: none;
-  gap: 2.5rem;
-}
-
-@media (min-width: 768px) {
-  .header__nav {
-    display: flex;
-  }
-}
-
-.header__nav a {
-  font-size: 0.875rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--color-ink-light);
-  position: relative;
-}
-
-.header__nav a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--color-cobalt);
-  transition: width var(--transition-smooth);
-}
-
-.header__nav a:hover::after,
-.header__nav a.active::after {
-  width: 100%;
-}
-
-.header__nav a:hover,
-.header__nav a.active {
-  color: var(--color-cobalt);
-}
-
-/* Mobile menu button */
 .menu-toggle {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -201,20 +130,21 @@ a {
   width: 44px;
   height: 44px;
   padding: 0;
-  background: none;
-  border: none;
+  background: rgba(248, 246, 241, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
   cursor: pointer;
-  z-index: 110;
+  z-index: 120;
+  transition: all var(--transition-fast);
 }
 
-@media (min-width: 768px) {
-  .menu-toggle {
-    display: none;
-  }
+.menu-toggle:hover {
+  background: rgba(248, 246, 241, 0.95);
 }
 
 .menu-toggle__line {
-  width: 24px;
+  width: 20px;
   height: 2px;
   background: var(--color-ink);
   transition: all var(--transition-fast);
@@ -222,15 +152,15 @@ a {
 }
 
 .menu-toggle__line:nth-child(1) {
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .menu-toggle__line:nth-child(2) {
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 
 .menu-toggle--open .menu-toggle__line:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 6px);
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
 .menu-toggle--open .menu-toggle__line:nth-child(2) {
@@ -238,52 +168,144 @@ a {
 }
 
 .menu-toggle--open .menu-toggle__line:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -6px);
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Mobile menu overlay */
-.mobile-menu {
+/* ============================================
+   SIDEBAR BACKDROP
+   ============================================ */
+.sidebar-backdrop {
   position: fixed;
   inset: 0;
-  background: var(--color-cream);
-  z-index: 105;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
+  background: rgba(26, 42, 58, 0.3);
   opacity: 0;
   visibility: hidden;
+  z-index: 100;
   transition: all var(--transition-smooth);
+  cursor: pointer;
 }
 
-.mobile-menu--open {
+.sidebar-backdrop--open {
   opacity: 1;
   visibility: visible;
 }
 
-.mobile-menu a {
+/* ============================================
+   SIDEBAR NAVIGATION
+   ============================================ */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  max-width: 85vw;
+  background: var(--color-cream);
+  border-right: 1px solid var(--color-silk);
+  z-index: 110;
+  transform: translateX(-100%);
+  transition: transform var(--transition-smooth);
+  overflow-y: auto;
+}
+
+.sidebar--open {
+  transform: translateX(0);
+}
+
+.sidebar__content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 2rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    width: 320px;
+  }
+  
+  .sidebar__content {
+    padding: 2.5rem 2rem;
+  }
+}
+
+.sidebar__header {
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-silk);
+}
+
+.sidebar__logo {
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 400;
+  letter-spacing: 0.02em;
   color: var(--color-ink);
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all var(--transition-smooth);
+  text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
-.mobile-menu--open a {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.mobile-menu--open a:nth-child(1) { transition-delay: 100ms; }
-.mobile-menu--open a:nth-child(2) { transition-delay: 150ms; }
-.mobile-menu--open a:nth-child(3) { transition-delay: 200ms; }
-.mobile-menu--open a:nth-child(4) { transition-delay: 250ms; }
-
-.mobile-menu a:hover {
+.sidebar__logo:hover {
   color: var(--color-cobalt);
+}
+
+.sidebar__nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.sidebar__nav-item {
+  margin-bottom: 0.5rem;
+}
+
+.sidebar__nav-item a {
+  display: block;
+  padding: 0.75rem 0;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--color-ink-light);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.sidebar__nav-item a::before {
+  content: '';
+  position: absolute;
+  left: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  background: var(--color-cobalt);
+  transition: height var(--transition-fast);
+  border-radius: 2px;
+}
+
+.sidebar__nav-item a:hover,
+.sidebar__nav-item a.active {
+  color: var(--color-ink);
+}
+
+.sidebar__nav-item a:hover::before,
+.sidebar__nav-item a.active::before {
+  height: 60%;
+}
+
+.sidebar__footer {
+  margin-top: auto;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-silk);
+}
+
+.sidebar__footer p {
+  font-size: 0.8rem;
+  color: var(--color-ink-light);
+  opacity: 0.6;
+  margin: 0;
 }
 
 /* ============================================
