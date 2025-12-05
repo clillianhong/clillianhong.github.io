@@ -1,25 +1,34 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Cell from '../components/Cell';
+import Hero from '../components/Hero';
+import ProjectCard from '../components/ProjectCard';
+import Footer from '../components/Footer';
 import data from '../data/projects';
 
-const DESKTOP_PADDING_RATIO = 0.1;
-const MOBILE_PADDING_RATIO = 0.05;
-
-const MOBILE_FONT_SIZE_RATIO = 0.02;
-const DESKTOP_FONT_SIZE_RATIO = 0.015;
-
-const PortfolioPage: React.FC = () => {
+const ArtPortfolioPage: React.FC = () => {
   return (
-    <div style={{backgroundColor:'#edeee5'}}>
-      <h1 style={{fontSize: window.innerWidth < 600 ? window.innerWidth * MOBILE_FONT_SIZE_RATIO : window.innerWidth * DESKTOP_FONT_SIZE_RATIO}}>illustrations & comics</h1>
-      {data.map((project) => (
-        <div style={{ paddingLeft: window.innerWidth < 600 ? window.innerWidth * MOBILE_PADDING_RATIO : window.innerWidth * DESKTOP_PADDING_RATIO, paddingRight: window.innerWidth < 600 ? window.innerWidth * MOBILE_PADDING_RATIO : window.innerWidth * DESKTOP_PADDING_RATIO }} key={project.title}>
-          <Cell data={project} />
+    <>
+      <Hero />
+      
+      <section className="section" style={{ background: 'var(--color-cream-warm)' }}>
+        <div className="container">
+          <header className="section__header">
+            <h2 className="section__title">Illustrations & Comics</h2>
+            <p className="section__subtitle">
+              Works inspired by mythology, porcelain, and the sea
+            </p>
+          </header>
+
+          <div className="gallery">
+            {data.map((project) => (
+              <ProjectCard key={project.title} project={project} />
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
-  )
+      </section>
+
+      <Footer />
+    </>
+  );
 };
 
-export default PortfolioPage;
+export default ArtPortfolioPage;
