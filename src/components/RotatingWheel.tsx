@@ -15,6 +15,8 @@ interface RotatingWheelProps {
   className?: string;
   /** Whether to show the interaction hint */
   showHint?: boolean;
+  /** Whether scroll/drag interactions are enabled */
+  interactive?: boolean;
 }
 
 const RotatingWheel: React.FC<RotatingWheelProps> = ({
@@ -25,6 +27,7 @@ const RotatingWheel: React.FC<RotatingWheelProps> = ({
   alt = 'Rotating artwork',
   className = '',
   showHint = true,
+  interactive = true,
 }) => {
   const [rotation, setRotation] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -46,7 +49,7 @@ const RotatingWheel: React.FC<RotatingWheelProps> = ({
   // Handle scroll wheel rotation
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container || !interactive) return;
 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
@@ -57,10 +60,11 @@ const RotatingWheel: React.FC<RotatingWheelProps> = ({
 
     container.addEventListener('wheel', handleWheel, { passive: false });
     return () => container.removeEventListener('wheel', handleWheel);
-  }, [sensitivity]);
+  }, [sensitivity, interactive]);
 
   // Handle drag rotation (mouse)
   const handleMouseDown = (e: React.MouseEvent) => {
+    if (!interactive) return;
     setIsDragging(true);
     lastAngleRef.current = getAngleFromCenter(e.clientX, e.clientY);
     lastTimeRef.current = Date.now();
@@ -94,7 +98,7 @@ const RotatingWheel: React.FC<RotatingWheelProps> = ({
 
   // Handle touch rotation
   const handleTouchStart = (e: React.TouchEvent) => {
-    if (e.touches.length !== 1) return;
+    if (!interactive || e.touches.length !== 1) return;
     setIsDragging(true);
     const touch = e.touches[0];
     lastAngleRef.current = getAngleFromCenter(touch.clientX, touch.clientY);
@@ -178,9 +182,9 @@ const RotatingWheel: React.FC<RotatingWheelProps> = ({
         width: sizeValue,
         height: sizeValue,
         position: 'relative',
-        cursor: isDragging ? 'grabbing' : 'grab',
+        cursor: interactive ? (isDragging ? 'grabbing' : 'grab') : 'default',
         userSelect: 'none',
-        touchAction: 'none',
+        touchAction: interactive ? 'none' : 'auto',
       }}
       onMouseDown={handleMouseDown}
       onTouchStart={handleTouchStart}
