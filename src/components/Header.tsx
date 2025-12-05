@@ -32,6 +32,18 @@ const Header: React.FC = () => {
     };
   }, [isMobileMenuOpen]);
 
+  // Close menu on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isMobileMenuOpen]);
+
   const navLinks = [
     { to: '/', label: 'Art' },
     { to: '/code', label: 'Work' },
@@ -69,22 +81,37 @@ const Header: React.FC = () => {
               )
             )}
           </nav>
-
-          <button
-            className={`menu-toggle ${isMobileMenuOpen ? 'menu-toggle--open' : ''}`}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={isMobileMenuOpen}
-          >
-            <span className="menu-toggle__line" />
-            <span className="menu-toggle__line" />
-            <span className="menu-toggle__line" />
-          </button>
         </div>
       </header>
 
+      {/* Hamburger button - positioned outside header for proper z-index stacking */}
+      <button
+        className={`menu-toggle ${isMobileMenuOpen ? 'menu-toggle--open' : ''}`}
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={isMobileMenuOpen}
+        style={{
+          position: 'fixed',
+          top: '1rem',
+          right: '1.5rem',
+          zIndex: 110, // Above mobile menu (105)
+        }}
+      >
+        <span className="menu-toggle__line" />
+        <span className="menu-toggle__line" />
+        <span className="menu-toggle__line" />
+      </button>
+
       {/* Mobile Menu Overlay */}
-      <div className={`mobile-menu ${isMobileMenuOpen ? 'mobile-menu--open' : ''}`}>
+      <div 
+        className={`mobile-menu ${isMobileMenuOpen ? 'mobile-menu--open' : ''}`}
+        onClick={(e) => {
+          // Close menu when clicking the background (not the links)
+          if (e.target === e.currentTarget) {
+            setIsMobileMenuOpen(false);
+          }
+        }}
+      >
         {navLinks.map((link) =>
           link.to ? (
             <Link key={link.label} to={link.to} onClick={() => setIsMobileMenuOpen(false)}>
@@ -119,4 +146,3 @@ const Header: React.FC = () => {
 };
 
 export default Header;
-
