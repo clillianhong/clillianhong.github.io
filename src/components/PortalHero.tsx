@@ -19,8 +19,10 @@ const PortalHero: React.FC = () => {
 
   const isPortrait = layoutMode === 'portrait';
 
-  // Calculate wheel size - starts at 100vw, but we use the scale transform
-  const baseWheelSize = '100vw';
+  // Calculate wheel size - use the larger of width/height to fill the screen
+  // On portrait mobile: 100vh fills vertically
+  // On landscape/desktop: 100vw fills horizontally
+  const baseWheelSize = isPortrait ? '100vh' : '100vw';
 
   return (
     <section
