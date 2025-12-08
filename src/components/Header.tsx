@@ -38,7 +38,6 @@ const Header: React.FC = () => {
     { to: '/', label: 'Art' },
     { to: '/code', label: 'Work' },
     { href: 'https://www.instagram.com/c.lillianhong/', label: 'Instagram' },
-    { href: 'https://www.linkedin.com/in/lillian-hong-69506b176/', label: 'LinkedIn' },
     { href: 'mailto:c.lillianhong@gmail.com', label: 'Contact' },
   ];
 

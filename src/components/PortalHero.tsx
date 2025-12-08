@@ -228,7 +228,7 @@ const PortalHero: React.FC = () => {
               marginBottom: isPortrait ? '0.5rem' : '1.25rem',
             }}
           >
-            About
+            hi, i'm lillian!
           </h2>
           
           <p
@@ -277,7 +277,6 @@ const PortalHero: React.FC = () => {
           }}>
             {[
               { href: 'https://www.instagram.com/c.lillianhong/', label: 'Instagram' },
-              { href: 'https://www.linkedin.com/in/lillian-hong-69506b176/', label: 'LinkedIn' },
               { href: 'mailto:c.lillianhong@gmail.com', label: 'Contact' },
             ].map((link) => (
               <a
