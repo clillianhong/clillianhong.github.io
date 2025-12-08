@@ -163,7 +163,7 @@ const PortalHero: React.FC = () => {
             <p
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: isPortrait ? '2vh' : '1.5vw', // ~2% of wheel diameter
+                fontSize: isPortrait ? '1.84vh' : '1.38vw', // ~1.8% of wheel diameter
                 fontStyle: 'italic',
                 color: '#ff3576',
                 margin: 0,
