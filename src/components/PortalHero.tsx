@@ -197,6 +197,28 @@ const PortalHero: React.FC = () => {
             overflow: isPortrait ? 'auto' : 'visible',
           }}
         >
+          {/* Profile photo - landscape only */}
+          {!isPortrait && (
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'flex-end',
+              marginBottom: '1rem',
+            }}>
+              <img
+                src={`${process.env.PUBLIC_URL}/profile.jpg`}
+                alt="Lillian Hong"
+                style={{
+                  width: '240px',
+                  height: '240px',
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                  border: '3px solid white',
+                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+                }}
+              />
+            </div>
+          )}
+          
           <h2
             style={{
               fontFamily: 'var(--font-display)',

@@ -21,9 +21,6 @@ const ArtPortfolioPage: React.FC = () => {
         <div className="container">
           <header className="section__header">
             <h2 className="section__title">Illustrations & Comics</h2>
-            <p className="section__subtitle">
-              Works inspired by mythology, porcelain, and the sea
-            </p>
           </header>
         </div>
 
