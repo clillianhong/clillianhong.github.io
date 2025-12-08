@@ -39,6 +39,7 @@ const Header: React.FC = () => {
     { to: '/code', label: 'Work' },
     { href: 'https://www.instagram.com/c.lillianhong/', label: 'Instagram' },
     { href: 'mailto:c.lillianhong@gmail.com', label: 'Contact' },
+    { href: '/lillian_hong_resume_2025.pdf', label: 'Resume', download: true },
   ];
 
   return (
@@ -94,8 +95,9 @@ const Header: React.FC = () => {
                 ) : (
                   <a
                     href={link.href}
-                    target={link.href?.startsWith('mailto') ? undefined : '_blank'}
-                    rel={link.href?.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+                    target={link.href?.startsWith('mailto') || link.download ? undefined : '_blank'}
+                    rel={link.href?.startsWith('mailto') || link.download ? undefined : 'noopener noreferrer'}
+                    download={link.download ? true : undefined}
                     onClick={() => setIsSidebarOpen(false)}
                   >
                     {link.label}
