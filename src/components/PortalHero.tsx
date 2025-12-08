@@ -169,7 +169,7 @@ const PortalHero: React.FC = () => {
                 margin: 0,
               }}
             >
-              artist · prototyper · angler
+              comics artist & illustrator
             </p>
           </div>
         </div>

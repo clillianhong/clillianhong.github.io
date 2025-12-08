@@ -12,7 +12,7 @@ const ArtPortfolioPage: React.FC = () => {
       <section 
         className="section" 
         style={{ 
-          background: 'var(--color-cream-warm)',
+          background: 'var(--color-cream)',
           position: 'relative',
           zIndex: 1,
         }}
