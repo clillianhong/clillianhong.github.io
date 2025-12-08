@@ -17,6 +17,7 @@ const ArtPortfolioPage: React.FC = () => {
           zIndex: 1,
         }}
       >
+        {/* Section header stays contained */}
         <div className="container">
           <header className="section__header">
             <h2 className="section__title">Illustrations & Comics</h2>
@@ -24,7 +25,10 @@ const ArtPortfolioPage: React.FC = () => {
               Works inspired by mythology, porcelain, and the sea
             </p>
           </header>
+        </div>
 
+        {/* Gallery expands full width on desktop */}
+        <div className="gallery-wrapper">
           <div className="gallery">
             {data.map((project) => (
               <ProjectCard key={project.title} project={project} />

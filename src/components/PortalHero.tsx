@@ -15,6 +15,7 @@ const PortalHero: React.FC = () => {
     bioOpacity,
     isInteractive,
     showScrollHint,
+    bioEdgePosition,
   } = useScrollPhase(2.0); // 2x viewport height for scroll distance
 
   const isPortrait = layoutMode === 'portrait';
@@ -90,12 +91,13 @@ const PortalHero: React.FC = () => {
             size="100%"
             sensitivity={2}
             showFrame={phase < 3}
-            showHint={isInteractive}
+            showHint={false}
             interactive={isInteractive}
             alt="Qingming Jie plate artwork"
           />
 
           {/* Center text - counter-rotates to stay readable */}
+          {/* Font sizes are percentage of wheel diameter (which is 100vw or 100vh) */}
           <div
             style={{
               position: 'absolute',
@@ -106,40 +108,65 @@ const PortalHero: React.FC = () => {
               textAlign: 'center',
               pointerEvents: centerTextOpacity < 0.2 ? 'none' : 'auto',
               zIndex: 20,
-              width: '55%',
+              width: '45%',
               transition: 'opacity 0.2s ease',
             }}
           >
-            <h1
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(1.75rem, 5vw, 3rem)',
-                fontWeight: 300,
-                color: 'var(--color-ink)',
-                margin: 0,
-                letterSpacing: '0.03em',
-                textShadow: '0 2px 30px rgba(248, 246, 241, 0.95)',
-              }}
-            >
-              Lillian Hong
-            </h1>
+            {/* Soft white glow background for legibility */}
             <div
               style={{
-                width: '50px',
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: isPortrait ? '50vh' : '40vw',
+                height: isPortrait ? '50vh' : '40vw',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.5) 60%, rgba(255,255,255,0.2) 75%, rgba(255,255,255,0) 100%)',
+                zIndex: -1,
+              }}
+            />
+            <h1
+              style={{
+                fontFamily: "'Rampart One', sans-serif",
+                fontSize: isPortrait ? '5.3vh' : '4.25vw',
+                fontWeight: 400,
+                color: '#ff3576',
+                margin: 0,
+                letterSpacing: '0.05em',
+                textShadow: '-2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff, 0 -2px 0 #fff, 0 2px 0 #fff, -2px 0 0 #fff, 2px 0 0 #fff',
+              }}
+            >
+              lillian hong
+            </h1>
+            <p
+              style={{
+                fontFamily: "'Rampart One', sans-serif",
+                fontSize: isPortrait ? '3.75vh' : '3vw', // ~75% the size of English name
+                fontWeight: 400,
+                color: '#ff3576',
+                margin: '0.3em 0 0 0',
+                letterSpacing: '0.2em',
+              }}
+            >
+              洪晨昕
+            </p>
+            <div
+              style={{
+                width: '15%',
                 height: '1px',
-                background: 'var(--color-cobalt)',
-                margin: '0.75rem auto',
+                background: '#ff3576',
+                margin: '0.5em auto',
                 opacity: 0.5,
               }}
             />
             <p
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(0.8rem, 2vw, 1.1rem)',
+                fontSize: isPortrait ? '2vh' : '1.5vw', // ~2% of wheel diameter
                 fontStyle: 'italic',
-                color: 'var(--color-cobalt-deep)',
+                color: '#ff3576',
                 margin: 0,
-                textShadow: '0 1px 15px rgba(248, 246, 241, 0.95)',
               }}
             >
               artist · prototyper · angler
@@ -148,34 +175,35 @@ const PortalHero: React.FC = () => {
         </div>
 
         {/* === BIO PANEL === */}
-        {/* Portrait: bottom of screen, centered */}
-        {/* Landscape: right side, vertically centered */}
+        {/* Portrait: below the plate, centered, compact text */}
+        {/* Landscape: right side, right-justified, hugging the edge */}
         <div
           className="bio-panel"
           style={{
             position: 'absolute',
-            // Portrait: position at bottom, full width
-            // Landscape: position on right side
-            top: isPortrait ? 'auto' : '50%',
-            bottom: isPortrait ? '8%' : 'auto',
-            left: isPortrait ? '5%' : '50%',
-            right: '5%',
+            // Position dynamically based on where wheel stops
+            top: isPortrait ? `${bioEdgePosition}%` : '50%',
+            bottom: isPortrait ? '2%' : 'auto',
+            left: isPortrait ? '5%' : 'auto',
+            right: isPortrait ? '5%' : '3%',
             transform: isPortrait ? 'none' : 'translateY(-50%)',
-            textAlign: isPortrait ? 'center' : 'left',
+            textAlign: isPortrait ? 'center' : 'right',
             opacity: bioOpacity,
             pointerEvents: bioOpacity < 0.3 ? 'none' : 'auto',
             zIndex: 5,
+            width: isPortrait ? 'auto' : `${100 - bioEdgePosition - 3}%`,
             maxWidth: isPortrait ? 'none' : '450px',
             transition: 'opacity 0.3s ease',
+            overflow: isPortrait ? 'auto' : 'visible',
           }}
         >
           <h2
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+              fontSize: isPortrait ? '1.1rem' : 'clamp(2rem, 4vw, 3rem)',
               fontWeight: 400,
               color: 'var(--color-ink)',
-              marginBottom: '1.25rem',
+              marginBottom: isPortrait ? '0.5rem' : '1.25rem',
             }}
           >
             About
@@ -183,10 +211,10 @@ const PortalHero: React.FC = () => {
           
           <p
             style={{
-              fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
-              lineHeight: 1.75,
+              fontSize: isPortrait ? '0.8rem' : 'clamp(1.1rem, 1.8vw, 1.5rem)',
+              lineHeight: 1.6,
               color: 'var(--color-ink-light)',
-              marginBottom: '1.25rem',
+              marginBottom: isPortrait ? '0.5rem' : '1.25rem',
             }}
           >
             While my professional work lives at the future intersection of wearable tech 
@@ -196,10 +224,10 @@ const PortalHero: React.FC = () => {
           
           <p
             style={{
-              fontSize: 'clamp(0.9rem, 1.4vw, 1.05rem)',
-              lineHeight: 1.75,
+              fontSize: isPortrait ? '0.8rem' : 'clamp(1.1rem, 1.8vw, 1.5rem)',
+              lineHeight: 1.6,
               color: 'var(--color-ink-light)',
-              marginBottom: '1.5rem',
+              marginBottom: isPortrait ? '0.5rem' : '1.5rem',
             }}
           >
             I draw inspiration from Fujianese and Taoist mythology, wuxia fantasy, 
@@ -208,10 +236,10 @@ const PortalHero: React.FC = () => {
 
           <p
             style={{
-              fontSize: 'clamp(0.8rem, 1.2vw, 0.9rem)',
+              fontSize: isPortrait ? '0.7rem' : 'clamp(1rem, 1.4vw, 1.25rem)',
               fontStyle: 'italic',
               color: 'var(--color-ink-light)',
-              marginBottom: '2rem',
+              marginBottom: isPortrait ? '0.75rem' : '2rem',
               opacity: 0.75,
             }}
           >
@@ -221,9 +249,9 @@ const PortalHero: React.FC = () => {
           {/* Links */}
           <div style={{ 
             display: 'flex', 
-            gap: '1.5rem', 
+            gap: isPortrait ? '1rem' : '1.5rem', 
             flexWrap: 'wrap',
-            justifyContent: isPortrait ? 'center' : 'flex-start',
+            justifyContent: isPortrait ? 'center' : 'flex-end',
           }}>
             {[
               { href: 'https://www.instagram.com/c.lillianhong/', label: 'Instagram' },
@@ -236,7 +264,7 @@ const PortalHero: React.FC = () => {
                 target={link.href.startsWith('mailto') ? undefined : '_blank'}
                 rel={link.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
                 style={{
-                  fontSize: '0.8rem',
+                  fontSize: isPortrait ? '0.7rem' : '0.85rem',
                   fontWeight: 500,
                   letterSpacing: '0.05em',
                   textTransform: 'uppercase',
@@ -302,13 +330,13 @@ const PortalHero: React.FC = () => {
         <div
           style={{
             position: 'absolute',
-            bottom: '2rem',
+            bottom: isPortrait ? '0.5rem' : '2rem',
             left: '50%',
             transform: 'translateX(-50%)',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '0.5rem',
+            gap: isPortrait ? '0.25rem' : '0.5rem',
             opacity: phase === 3 ? 1 : 0,
             transition: 'opacity 0.4s ease',
             pointerEvents: 'none',
@@ -316,7 +344,7 @@ const PortalHero: React.FC = () => {
         >
           <span
             style={{
-              fontSize: '0.7rem',
+              fontSize: isPortrait ? '0.55rem' : '0.7rem',
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
               color: 'var(--color-ink-light)',
@@ -325,8 +353,8 @@ const PortalHero: React.FC = () => {
             View work
           </span>
           <svg
-            width="16"
-            height="16"
+            width={isPortrait ? '12' : '16'}
+            height={isPortrait ? '12' : '16'}
             viewBox="0 0 24 24"
             fill="none"
             stroke="var(--color-cobalt)"

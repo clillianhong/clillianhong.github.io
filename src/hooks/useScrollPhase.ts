@@ -1,53 +1,18 @@
 import { useState, useEffect, useMemo } from 'react';
 
 // Phase boundaries (scroll progress 0-1)
-const PHASE_1_END = 0.4;    // Shrink phase ends
-const PHASE_2_END = 0.9;    // Roll phase ends
-const INTERACTIVE_START = 0.9;
+const PHASE_1_END = 0.5;    // Shrink phase ends
+const PHASE_2_END = 0.9;    // Settle phase ends
+const INTERACTIVE_START = 0.85;
 
-// Animation keyframes for LANDSCAPE (width > height) - roll LEFT
-const KEYFRAMES_LANDSCAPE = {
-  phase1Start: {
-    scale: 1.0,
-    x: 50,        // percentage
-    y: 50,        // percentage
-    rotation: 0,
-  },
-  phase1End: {
-    scale: 0.6,
-    x: 50,
-    y: 50,
-    rotation: -90,
-  },
-  phase2End: {
-    scale: 0.5,
-    x: 0,         // center at left edge (half visible)
-    y: 50,
-    rotation: -185,
-  },
+// Bio panel edge positions (must match PortalHero component)
+const BIO_EDGE = {
+  portrait: 55,    // Bio starts at this % from top (with small gap)
+  landscape: 62,   // Bio starts at this % from left (hugging right side)
 };
 
-// Animation keyframes for PORTRAIT (height > width) - roll UP
-const KEYFRAMES_PORTRAIT = {
-  phase1Start: {
-    scale: 1.0,
-    x: 50,
-    y: 50,
-    rotation: 0,
-  },
-  phase1End: {
-    scale: 0.55,
-    x: 50,
-    y: 50,
-    rotation: -90,
-  },
-  phase2End: {
-    scale: 0.4,
-    x: 50,        // stay centered horizontally
-    y: 12,        // move to top (partially visible)
-    rotation: -185,
-  },
-};
+// Minimum gap between wheel edge and bio (in % of viewport)
+const WHEEL_BIO_GAP = 5;
 
 export type LayoutMode = 'portrait' | 'landscape';
 
@@ -67,6 +32,9 @@ export interface ScrollPhaseState {
   bioOpacity: number;
   isInteractive: boolean;
   showScrollHint: boolean;
+  
+  // Calculated values for component use
+  bioEdgePosition: number;
 }
 
 // Linear interpolation
@@ -85,14 +53,20 @@ export function useScrollPhase(heroHeight: number = 2.0): ScrollPhaseState {
   const [layoutMode, setLayoutMode] = useState<LayoutMode>(
     window.innerHeight > window.innerWidth ? 'portrait' : 'landscape'
   );
+  const [viewportRatio, setViewportRatio] = useState(
+    window.innerWidth / window.innerHeight
+  );
 
-  // Track viewport orientation
+  // Track viewport orientation and ratio
   useEffect(() => {
     const handleResize = () => {
-      setLayoutMode(window.innerHeight > window.innerWidth ? 'portrait' : 'landscape');
+      const isPortrait = window.innerHeight > window.innerWidth;
+      setLayoutMode(isPortrait ? 'portrait' : 'landscape');
+      setViewportRatio(window.innerWidth / window.innerHeight);
     };
 
     window.addEventListener('resize', handleResize);
+    handleResize(); // Initial call
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -117,8 +91,41 @@ export function useScrollPhase(heroHeight: number = 2.0): ScrollPhaseState {
   }, [heroHeight, hasScrolled]);
 
   const state = useMemo((): ScrollPhaseState => {
-    // Select keyframes based on layout mode
-    const KEYFRAMES = layoutMode === 'portrait' ? KEYFRAMES_PORTRAIT : KEYFRAMES_LANDSCAPE;
+    // Calculate target scale so wheel fits within viewport
+    // Portrait: wheel is 100vh, needs to fit in width → scale = vw/vh = viewportRatio
+    // Landscape: wheel is 100vw, needs to fit in height → scale = vh/vw = 1/viewportRatio
+    const fitScale = layoutMode === 'portrait' 
+      ? Math.min(viewportRatio * 0.95, 0.9)  // Fit in width with padding
+      : Math.min((1 / viewportRatio) * 0.95, 0.9); // Fit in height with padding
+
+    // Get the bio edge position for current layout
+    const bioEdge = layoutMode === 'portrait' ? BIO_EDGE.portrait : BIO_EDGE.landscape;
+    
+    // Calculate final wheel position so it doesn't overlap bio
+    // Wheel's edge = wheelCenter + (wheelDiameter / 2)
+    // wheelDiameter in viewport % = fitScale * 100 (since wheel is 100vw or 100vh)
+    // We want: wheelCenter + (fitScale * 50) + gap < bioEdge
+    // Therefore: wheelCenter = bioEdge - gap - (fitScale * 50)
+    const finalWheelPosition = bioEdge - WHEEL_BIO_GAP - (fitScale * 50);
+    
+    // Allow wheel to go off-screen (negative position) if needed to not cover bio
+    // Only clamp to prevent wheel from going completely off-screen
+    const clampedFinalPosition = Math.max(finalWheelPosition, -fitScale * 30);
+
+    // Animation keyframes based on layout mode
+    const KEYFRAMES = layoutMode === 'portrait' 
+      ? {
+          // PORTRAIT: Shrink to fit width, move to top
+          phase1Start: { scale: 1.0, x: 50, y: 50, rotation: 0 },
+          phase1End: { scale: fitScale, x: 50, y: 50, rotation: -60 },
+          phase2End: { scale: fitScale * 0.95, x: 50, y: clampedFinalPosition, rotation: -90 },
+        }
+      : {
+          // LANDSCAPE: Shrink to fit height, move left
+          phase1Start: { scale: 1.0, x: 50, y: 50, rotation: 0 },
+          phase1End: { scale: fitScale, x: 50, y: 50, rotation: -60 },
+          phase2End: { scale: fitScale * 0.95, x: clampedFinalPosition, y: 50, rotation: -90 },
+        };
 
     // Determine current phase
     let phase: 1 | 2 | 3;
@@ -130,14 +137,14 @@ export function useScrollPhase(heroHeight: number = 2.0): ScrollPhaseState {
       phase = 3;
     }
 
-    // Calculate phase-local progress (0-1 within each phase)
+    // Calculate animation values
     let wheelScale: number;
     let wheelX: number;
     let wheelY: number;
     let wheelRotation: number;
 
     if (phase === 1) {
-      // Phase 1: Shrink & initial rotation
+      // Phase 1: Shrink to fit & initial rotation
       const t = easeOutCubic(scrollProgress / PHASE_1_END);
       
       wheelScale = lerp(KEYFRAMES.phase1Start.scale, KEYFRAMES.phase1End.scale, t);
@@ -146,9 +153,9 @@ export function useScrollPhase(heroHeight: number = 2.0): ScrollPhaseState {
       wheelRotation = lerp(KEYFRAMES.phase1Start.rotation, KEYFRAMES.phase1End.rotation, t);
       
     } else if (phase === 2) {
-      // Phase 2: Roll (rotation linked to translation)
+      // Phase 2: Small roll to final position
       const phase2Progress = (scrollProgress - PHASE_1_END) / (PHASE_2_END - PHASE_1_END);
-      const t = phase2Progress; // Linear for rolling feel
+      const t = easeOutCubic(phase2Progress);
       
       wheelScale = lerp(KEYFRAMES.phase1End.scale, KEYFRAMES.phase2End.scale, t);
       wheelX = lerp(KEYFRAMES.phase1End.x, KEYFRAMES.phase2End.x, t);
@@ -174,8 +181,7 @@ export function useScrollPhase(heroHeight: number = 2.0): ScrollPhaseState {
       bioOpacity = 0;
     } else if (phase === 2) {
       const phase2Progress = (scrollProgress - PHASE_1_END) / (PHASE_2_END - PHASE_1_END);
-      // Delay bio appearance until wheel has moved a bit
-      bioOpacity = lerp(0, 1, Math.max(0, (phase2Progress - 0.3) / 0.7));
+      bioOpacity = lerp(0, 1, easeOutCubic(phase2Progress));
     } else {
       bioOpacity = 1;
     }
@@ -195,8 +201,9 @@ export function useScrollPhase(heroHeight: number = 2.0): ScrollPhaseState {
       bioOpacity,
       isInteractive,
       showScrollHint,
+      bioEdgePosition: bioEdge,
     };
-  }, [scrollProgress, hasScrolled, layoutMode]);
+  }, [scrollProgress, hasScrolled, layoutMode, viewportRatio]);
 
   return state;
 }

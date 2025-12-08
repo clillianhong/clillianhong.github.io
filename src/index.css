@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600&family=Rampart+One&display=swap');
 
 /* Tailwind v4 - base layer */
 @import "tailwindcss";
@@ -510,6 +510,16 @@ a {
 /* ============================================
    PROJECT GALLERY
    ============================================ */
+.gallery-wrapper {
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .gallery-wrapper {
+    padding: 0 2rem;
+  }
+}
+
 .gallery {
   display: grid;
   gap: 1.5rem;
@@ -518,13 +528,20 @@ a {
 @media (min-width: 640px) {
   .gallery {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    gap: 1.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .gallery {
     grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .gallery {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

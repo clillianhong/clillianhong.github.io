@@ -258,25 +258,6 @@ const RotatingWheel: React.FC<RotatingWheelProps> = ({
         )}
       </div>
 
-      {/* Center pin decoration */}
-      {showFrame && (
-        <div
-          className="rotating-wheel__center"
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '12%',
-            height: '12%',
-            borderRadius: '50%',
-            background: 'linear-gradient(135deg, var(--color-cream, #f8f6f1) 0%, var(--color-silk, #e8e4db) 100%)',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.8)',
-            border: '2px solid var(--color-cobalt, #2B4F81)',
-            pointerEvents: 'none',
-          }}
-        />
-      )}
 
       {/* Interaction hint */}
       {showHint && (
