@@ -539,12 +539,6 @@ a {
   }
 }
 
-@media (min-width: 1400px) {
-  .gallery {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 /* ============================================
    PROJECT CARD
    ============================================ */
@@ -868,6 +862,11 @@ a {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes bounce-horizontal {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-5px); }
 }
 
 .animate-fade-in-up {

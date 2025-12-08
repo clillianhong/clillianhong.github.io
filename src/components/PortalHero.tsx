@@ -172,7 +172,50 @@ const PortalHero: React.FC = () => {
               comics artist & illustrator
             </p>
           </div>
+
         </div>
+
+        {/* "Spin me!" hint - landscape only, positioned at top of viewport */}
+        {!isPortrait && (
+          <div
+            style={{
+              position: 'absolute',
+              top: '1.5rem',
+              left: `calc(${wheelX}% + 18vw)`,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              opacity: isInteractive ? 1 : 0,
+              transition: 'opacity 0.6s ease',
+              transitionDelay: isInteractive ? '0.3s' : '0s',
+              pointerEvents: 'none',
+              zIndex: 15,
+            }}
+          >
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--color-cobalt)"
+              strokeWidth="2"
+              style={{ animation: 'bounce-horizontal 1s ease infinite' }}
+            >
+              <polyline points="15 6 9 12 15 18" />
+            </svg>
+            <span
+              style={{
+                fontSize: '1.35rem',
+                fontWeight: 500,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                color: 'var(--color-ink-light)',
+              }}
+            >
+              spin me!
+            </span>
+          </div>
+        )}
 
         {/* === BIO PANEL === */}
         {/* Portrait: below the plate, centered, compact text */}
@@ -236,14 +279,19 @@ const PortalHero: React.FC = () => {
               fontSize: isPortrait ? '0.8rem' : 'clamp(1.1rem, 1.8vw, 1.5rem)',
               lineHeight: 1.6,
               color: 'var(--color-ink-light)',
-              marginBottom: isPortrait ? '0.5rem' : '1.25rem',
+              marginBottom: isPortrait ? '0.5rem' : '1rem',
             }}
           >
-            While my professional work lives at the future intersection of wearable tech 
-            and artificial intelligence, my creative work is rooted in the past—infused 
-            with a reverence for nature and history.
+            <em>"imagine, which is to say remember."</em>
+            <br />
+            <span style={{ 
+              fontSize: isPortrait ? '0.7rem' : 'clamp(0.85rem, 1.15vw, 1rem)',
+              opacity: 0.7,
+            }}>
+              — "Have You Heard of the Megajail in Chinatown?" by the W.O.W. project
+            </span>
           </p>
-          
+
           <p
             style={{
               fontSize: isPortrait ? '0.8rem' : 'clamp(1.1rem, 1.8vw, 1.5rem)',
@@ -252,8 +300,11 @@ const PortalHero: React.FC = () => {
               marginBottom: isPortrait ? '0.5rem' : '1.5rem',
             }}
           >
-            I draw inspiration from Fujianese and Taoist mythology, wuxia fantasy, 
-            Chinese porcelain, and the ocean.
+            my work is rooted in exploring the past as a vehicle for imagined futures, infused with 
+            a reverence for the natural world and history. 
+            hailing from south east china and new york, 
+            i draw inspiration from fujianese and taoist mythology, wuxia fantasy, chinese porcelain, 
+            and the ocean.
           </p>
 
           <p
@@ -265,7 +316,7 @@ const PortalHero: React.FC = () => {
               opacity: 0.75,
             }}
           >
-            Favorite things: oolong tea, emerald, moon snails, fish
+            favorite things: oolong tea, emerald, moon snails
           </p>
 
           {/* Links */}
@@ -360,14 +411,14 @@ const PortalHero: React.FC = () => {
             flexDirection: 'column',
             alignItems: 'center',
             gap: isPortrait ? '0.25rem' : '0.5rem',
-            opacity: phase === 3 ? 1 : 0,
+            opacity: phase === 3 && !isPortrait ? 1 : 0,
             transition: 'opacity 0.4s ease',
             pointerEvents: 'none',
           }}
         >
           <span
             style={{
-              fontSize: isPortrait ? '0.55rem' : '0.7rem',
+              fontSize: isPortrait ? '0.55rem' : '1.05rem',
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
               color: 'var(--color-ink-light)',
@@ -376,8 +427,8 @@ const PortalHero: React.FC = () => {
             View work
           </span>
           <svg
-            width={isPortrait ? '12' : '16'}
-            height={isPortrait ? '12' : '16'}
+            width={isPortrait ? '12' : '24'}
+            height={isPortrait ? '12' : '24'}
             viewBox="0 0 24 24"
             fill="none"
             stroke="var(--color-cobalt)"

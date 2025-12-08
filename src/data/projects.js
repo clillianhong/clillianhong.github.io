@@ -35,6 +35,13 @@ const data = [
           + ' and unknown future. A silent short story.',
     },
     {
+        title: 'Flotsam, Jetsam',
+        subtitle: 'Comic',
+        image: '/project_title_cards/comics/flotsam_jetsam_comic.png',
+        date: '2025-12-08',
+        desc: '',
+    },
+    {
         title: 'The wise love the sea; the virtuous love the mountains',
         subtitle: 'Illustration | Digital + Risograph printed',
         image: '/project_title_cards/illustrations/confucius_folding.png',
@@ -51,6 +58,34 @@ const data = [
           'Concept cover art for a future comic about a porcelain doll. Features the traditional'
           + ' qinghua color palette of cobalt blue on white glaze, the most iconic chinese porcelain style.',
     },
+    {
+      title: 'Memory Waves',
+      subtitle: 'Comic',
+      image: '/project_title_cards/comics/memory_waves_2.jpg',
+      date: '2025-12-08',
+      desc: '',
+  },
+    {
+      title: 'After The Opera',
+      subtitle: 'Illustration | Digital',
+      image: '/project_title_cards/illustrations/after_the_opera.jpg',
+      date: '2025-12-08',
+      desc: 'Concept art inspired by "Farewell My Concubine"',
+  },
+  {
+      title: 'Orchid Girl',
+      subtitle: 'Illustration | Digital',
+      image: '/project_title_cards/illustrations/oc_sketch.jpg',
+      date: '2025-12-08',
+      desc: 'Digital painting',
+  },
+  {
+      title: 'Wu Mei on Lotus',
+      subtitle: 'Illustration | Risograph',
+      image: '/project_title_cards/illustrations/wu_zetian_riso.jpg',
+      date: '2025-12-08',
+      desc: 'Risograph illustration',
+  },
     {
         title: 'Poeny Dream',
         subtitle: 'Illustration | Digital',

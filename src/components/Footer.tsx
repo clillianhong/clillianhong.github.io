@@ -21,14 +21,6 @@ const Footer: React.FC = () => {
               Instagram
             </a>
             <a
-              href="https://www.linkedin.com/in/lillian-hong-69506b176/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer__link"
-            >
-              LinkedIn
-            </a>
-            <a
               href="#"
               className="footer__link"
               onClick={(e) => {
