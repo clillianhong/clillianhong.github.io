@@ -240,19 +240,19 @@ const PortalHero: React.FC = () => {
             overflow: isPortrait ? 'auto' : 'visible',
           }}
         >
-          {/* Profile photo - landscape only */}
+          {/* Profile photo - landscape only, fluid size */}
           {!isPortrait && (
             <div style={{ 
               display: 'flex', 
               justifyContent: 'flex-end',
-              marginBottom: '1rem',
+              marginBottom: 'clamp(0.75rem, 2vw, 1.5rem)',
             }}>
               <img
                 src={`${process.env.PUBLIC_URL}/profile.jpg`}
                 alt="Lillian Hong"
                 style={{
-                  width: '240px',
-                  height: '240px',
+                  width: 'clamp(150px, 18vw, 280px)',
+                  height: 'clamp(150px, 18vw, 280px)',
                   borderRadius: '50%',
                   objectFit: 'cover',
                   border: '3px solid white',
@@ -265,10 +265,15 @@ const PortalHero: React.FC = () => {
           <h2
             style={{
               fontFamily: 'var(--font-display)',
-              fontSize: isPortrait ? '1.1rem' : 'clamp(2rem, 4vw, 3rem)',
+              // Portrait: scale with vh (height-based), Landscape: scale with vw (width-based)
+              fontSize: isPortrait 
+                ? 'clamp(1rem, 2.5vh, 1.5rem)' 
+                : 'clamp(1.5rem, 3.5vw, 3rem)',
               fontWeight: 400,
               color: 'var(--color-ink)',
-              marginBottom: isPortrait ? '0.5rem' : '1.25rem',
+              marginBottom: isPortrait 
+                ? 'clamp(0.3rem, 1vh, 0.75rem)' 
+                : 'clamp(0.75rem, 1.5vw, 1.5rem)',
             }}
           >
             hi, i'm lillian!
@@ -276,16 +281,22 @@ const PortalHero: React.FC = () => {
           
           <p
             style={{
-              fontSize: isPortrait ? '0.8rem' : 'clamp(1.1rem, 1.8vw, 1.5rem)',
+              fontSize: isPortrait 
+                ? 'clamp(0.7rem, 1.8vh, 1rem)' 
+                : 'clamp(1rem, 1.6vw, 1.5rem)',
               lineHeight: 1.6,
               color: 'var(--color-ink-light)',
-              marginBottom: isPortrait ? '0.5rem' : '1rem',
+              marginBottom: isPortrait 
+                ? 'clamp(0.3rem, 1vh, 0.75rem)' 
+                : 'clamp(0.5rem, 1vw, 1rem)',
             }}
           >
             <em>"imagine, which is to say remember."</em>
             <br />
             <span style={{ 
-              fontSize: isPortrait ? '0.7rem' : 'clamp(0.85rem, 1.15vw, 1rem)',
+              fontSize: isPortrait 
+                ? 'clamp(0.6rem, 1.5vh, 0.85rem)' 
+                : 'clamp(0.75rem, 1vw, 1rem)',
               opacity: 0.7,
             }}>
               — "Have You Heard of the Megajail in Chinatown?" by the W.O.W. project
@@ -294,10 +305,14 @@ const PortalHero: React.FC = () => {
 
           <p
             style={{
-              fontSize: isPortrait ? '0.8rem' : 'clamp(1.1rem, 1.8vw, 1.5rem)',
+              fontSize: isPortrait 
+                ? 'clamp(0.7rem, 1.8vh, 1rem)' 
+                : 'clamp(1rem, 1.6vw, 1.5rem)',
               lineHeight: 1.6,
               color: 'var(--color-ink-light)',
-              marginBottom: isPortrait ? '0.5rem' : '1.5rem',
+              marginBottom: isPortrait 
+                ? 'clamp(0.3rem, 1vh, 0.75rem)' 
+                : 'clamp(1rem, 1.5vw, 1.75rem)',
             }}
           >
             my work is rooted in exploring the past as a vehicle for imagined futures, infused with 
@@ -309,10 +324,14 @@ const PortalHero: React.FC = () => {
 
           <p
             style={{
-              fontSize: isPortrait ? '0.7rem' : 'clamp(1rem, 1.4vw, 1.25rem)',
+              fontSize: isPortrait 
+                ? 'clamp(0.6rem, 1.5vh, 0.9rem)' 
+                : 'clamp(0.85rem, 1.2vw, 1.25rem)',
               fontStyle: 'italic',
               color: 'var(--color-ink-light)',
-              marginBottom: isPortrait ? '0.75rem' : '2rem',
+              marginBottom: isPortrait 
+                ? 'clamp(0.5rem, 1.5vh, 1rem)' 
+                : 'clamp(1rem, 2vw, 2.5rem)',
               opacity: 0.75,
             }}
           >
@@ -322,7 +341,9 @@ const PortalHero: React.FC = () => {
           {/* Links */}
           <div style={{ 
             display: 'flex', 
-            gap: isPortrait ? '1rem' : '1.5rem', 
+            gap: isPortrait 
+              ? 'clamp(0.75rem, 2vh, 1.25rem)' 
+              : 'clamp(1rem, 1.5vw, 2rem)', 
             flexWrap: 'wrap',
             justifyContent: isPortrait ? 'center' : 'flex-end',
           }}>
@@ -338,7 +359,9 @@ const PortalHero: React.FC = () => {
                 rel={link.href.startsWith('mailto') || link.download ? undefined : 'noopener noreferrer'}
                 download={link.download ? true : undefined}
                 style={{
-                  fontSize: isPortrait ? '0.7rem' : '0.85rem',
+                  fontSize: isPortrait 
+                    ? 'clamp(0.6rem, 1.5vh, 0.85rem)' 
+                    : 'clamp(0.7rem, 1vw, 1rem)',
                   fontWeight: 500,
                   letterSpacing: '0.05em',
                   textTransform: 'uppercase',
