@@ -1,5 +1,13 @@
 const data = [
     {
+        title: 'Vessel Blue',
+        subtitle: 'Comic | Webcomic',
+        image: '/project_title_cards/comics/vessel_blue_cover.png',
+        date: '2026-04-17',
+        desc: 'A genre and gender bending romantic fantasy webcomic. Coming soon.',
+        internalLink: '/vessel_blue',
+    },
+    {
         title: 'Mazu',
         subtitle: 'Illustration | Digital + Riso Print',
         image: '/project_title_cards/illustrations/mazu_original.jpg',

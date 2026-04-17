@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 export interface ProjectData {
@@ -8,6 +9,7 @@ export interface ProjectData {
   date: string;
   desc: string;
   link?: string;
+  internalLink?: string;
 }
 
 interface ProjectCardProps {
@@ -16,11 +18,14 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
+  const navigate = useNavigate();
   // Extract category from subtitle (e.g., "Illustration | Digital" -> "Illustration")
   const category = project.subtitle?.split('|')[0]?.trim() || '';
-  
+
   const handleClick = () => {
-    if (project.link) {
+    if (project.internalLink) {
+      navigate(project.internalLink);
+    } else if (project.link) {
       window.open(project.link, '_blank', 'noopener,noreferrer');
     } else if (onClick) {
       onClick();
