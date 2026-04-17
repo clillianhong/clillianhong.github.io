@@ -1,8 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
+import PromoBanner from './components/PromoBanner';
 import ArtPortfolioPage from './pages/ArtPortfolioPage';
 import CodeProjectsPage from './pages/CodeProjectPage';
+import VesselBluePage from './pages/VesselBluePage';
 import WheelTestPage from './pages/WheelTestPage';
 import './index.css';
 
@@ -10,11 +12,13 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <PromoBanner />
         <Header />
         <main>
           <Routes>
             <Route path="/" element={<ArtPortfolioPage />} />
             <Route path="/code" element={<CodeProjectsPage />} />
+            <Route path="/vessel_blue" element={<VesselBluePage />} />
             <Route path="/wheel" element={<WheelTestPage />} />
           </Routes>
         </main>
