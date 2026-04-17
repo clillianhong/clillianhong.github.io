@@ -855,14 +855,17 @@ a {
    ============================================ */
 .promo-banner {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 130;
-  background: linear-gradient(135deg, var(--color-cobalt-deep), var(--color-cobalt));
+  background: linear-gradient(135deg, rgba(30, 58, 95, 0.88), rgba(43, 79, 129, 0.88));
+  backdrop-filter: blur(8px);
   color: white;
   font-family: var(--font-display);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  max-width: calc(100% - 120px);
 }
 
 .promo-banner__inner {

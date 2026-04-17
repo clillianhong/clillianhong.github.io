@@ -12,7 +12,7 @@ const PromoBanner: React.FC = () => {
       <div className="promo-banner">
         <div className="promo-banner__inner">
           <Link to="/vessel_blue" className="promo-banner__link">
-            Coming Soon: <em>Vessel Blue</em> the Webcomic!
+            Coming Soon: <em style={{ textDecoration: 'underline', textUnderlineOffset: '3px' }}>Vessel Blue</em> the Webcomic!
           </Link>
           <button
             className="promo-banner__subscribe"
