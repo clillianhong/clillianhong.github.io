@@ -348,7 +348,7 @@ const PortalHero: React.FC = () => {
             justifyContent: isPortrait ? 'center' : 'flex-end',
           }}>
             {[
-              { href: 'https://www.instagram.com/c.lillianhong/', label: 'Instagram' },
+              { href: 'https://www.instagram.com/vessel_blue_/', label: 'Instagram' },
               { href: 'mailto:c.lillianhong@gmail.com', label: 'Contact' },
               { href: '/lillian_hong_resume_2025.pdf', label: 'Resume', download: true },
             ].map((link) => (

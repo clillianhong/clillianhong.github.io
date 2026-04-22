@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import RotatingWheel from '../components/RotatingWheel';
 import Header from '../components/Header';
+import PorcelainPlate from '../components/PorcelainPlate';
 
 const WheelTestPage: React.FC = () => {
   const [wheelSize, setWheelSize] = useState(350);
@@ -247,6 +248,38 @@ const WheelTestPage: React.FC = () => {
                   Placeholder
                 </button>
               </div>
+            </div>
+          </div>
+
+          {/* Porcelain Plate Test */}
+          <div style={{ marginTop: '4rem', marginBottom: '3rem' }}>
+            <header style={{ textAlign: 'center', marginBottom: '2rem' }}>
+              <h2 style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+                color: 'var(--color-ink)',
+                marginBottom: '0.5rem',
+              }}>
+                Porcelain Plate
+              </h2>
+              <p style={{ color: 'var(--color-ink-light)', fontStyle: 'italic' }}>
+                CSS/SVG rectangular serving plate
+              </p>
+            </header>
+            <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+              <PorcelainPlate>
+                <div style={{ textAlign: 'center', color: 'var(--color-cobalt-deep)' }}>
+                  <p style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)',
+                    fontWeight: 400,
+                    fontStyle: 'italic',
+                    margin: 0,
+                  }}>
+                    Content goes here
+                  </p>
+                </div>
+              </PorcelainPlate>
             </div>
           </div>
 

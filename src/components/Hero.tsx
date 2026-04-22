@@ -34,7 +34,7 @@ const Hero: React.FC = () => {
 
             <div className="hero__links">
               <a
-                href="https://www.instagram.com/c.lillianhong/"
+                href="https://www.instagram.com/vessel_blue_/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hero__link"

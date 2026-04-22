@@ -26,6 +26,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     <title>Lillian Hong - Art & Work</title>
+    <script>
+      // Restore SPA route from 404.html redirect
+      (function () {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

@@ -37,7 +37,7 @@ const Header: React.FC = () => {
   const navLinks = [
     { to: '/', label: 'Art' },
     { to: '/code', label: 'Work' },
-    { href: 'https://www.instagram.com/c.lillianhong/', label: 'Instagram' },
+    { href: 'https://www.instagram.com/vessel_blue_/', label: 'Instagram' },
     { to: '/vessel_blue', label: 'Vessel Blue the Webcomic' },
     { href: 'mailto:c.lillianhong@gmail.com', label: 'Contact' },
     { href: '/lillian_hong_resume_2025.pdf', label: 'Resume', download: true },
