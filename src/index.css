@@ -1058,6 +1058,105 @@ a {
   pointer-events: none;
 }
 
+/* Comic Description Page (generic template) */
+.comic-desc {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 0 4rem;
+  background: var(--color-cream);
+}
+
+.comic-desc__layout {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+@media (min-width: 768px) {
+  .comic-desc__layout {
+    flex-direction: row;
+    align-items: center;
+    gap: 4rem;
+  }
+}
+
+.comic-desc__text {
+  flex: 1;
+}
+
+.comic-desc__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-cobalt);
+  margin-bottom: 0.75rem;
+}
+
+.comic-desc__title {
+  color: var(--color-cobalt-deep);
+  margin-bottom: 1.5rem;
+}
+
+.comic-desc__tagline {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-style: italic;
+  color: var(--color-cobalt);
+  margin-bottom: 1.5rem;
+}
+
+.comic-desc__body {
+  color: var(--color-ink-light);
+  max-width: 500px;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.comic-desc__status {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-terracotta);
+}
+
+.comic-desc__image-wrapper {
+  flex: 1;
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .comic-desc__image-wrapper {
+    max-width: none;
+  }
+}
+
+.comic-desc__image {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 2px;
+  filter: grayscale(10%);
+  transition: filter var(--transition-slow);
+}
+
+.comic-desc__image:hover {
+  filter: grayscale(0%);
+}
+
+.comic-desc__image-frame {
+  position: absolute;
+  inset: -12px;
+  border: 1px solid var(--color-cobalt);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
 /* ============================================
    ANIMATIONS
    ============================================ */

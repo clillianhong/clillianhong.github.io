@@ -2,16 +2,15 @@ import React from 'react';
 import ComicBook from '../components/ComicBook';
 
 const shelves = [
-  { imageSrc: '/project_title_cards/comics/vessel_blue_cover.png', href: '/vessel_blue', alt: 'Vessel Blue Issue 1' },
-  { imageSrc: '/project_title_cards/comics/vessel_blue_cover.png', href: '/vessel_blue', alt: 'Vessel Blue Issue 1' },
-  { imageSrc: '/project_title_cards/comics/vessel_blue_cover.png', href: '/vessel_blue', alt: 'Vessel Blue Issue 1' },
-  { imageSrc: '/project_title_cards/comics/vessel_blue_cover.png', href: '/vessel_blue', alt: 'Vessel Blue Issue 1' },
-  { imageSrc: '/project_title_cards/comics/vessel_blue_cover.png', href: '/vessel_blue', alt: 'Vessel Blue Issue 1' },
-  { imageSrc: '/project_title_cards/comics/vessel_blue_cover.png', href: '/vessel_blue', alt: 'Vessel Blue Issue 1' },
+  { imageSrc: '/project_title_cards/comics/vessel_blue_cover.png', href: '/vessel_blue', alt: 'Vessel Blue' },
+  { imageSrc: '/project_title_cards/comics/millennia_museum_cover.png', href: '/millennia_museum', alt: 'Millennia Museum' },
+  { imageSrc: '/project_title_cards/comics/memory_waves_2.jpg', href: '/memory_waves', alt: 'Memory Waves' },
+  { imageSrc: '/project_title_cards/comics/flotsam_jetsam_comic.png', href: '/flotsam_jetsam', alt: 'Flotsam, Jetsam' },
+  { imageSrc: '/project_title_cards/comics/qingmingjie_plate.png', href: '/qingming_jie', alt: 'Rose Medallion Qingming Jie' },
 ];
 
-const FLOAT_DURATIONS = [4.5, 5.2, 3.8, 4.0, 4.8, 3.5];
-const FLOAT_DELAYS = [0, -1.5, -3, -2, -0.8, -2.5];
+const FLOAT_DURATIONS = [4.5, 5.2, 3.8, 4.0, 4.8];
+const FLOAT_DELAYS = [0, -1.5, -3, -2, -0.8];
 
 const BookshelfPage: React.FC = () => {
   return (
@@ -43,7 +42,7 @@ const BookshelfPage: React.FC = () => {
           }
           .bookshelf-grid {
             grid-template-columns: 1fr;
-            padding-top: 50vh;
+            padding-top: 25vh;
           }
         }
       `}</style>
@@ -59,18 +58,21 @@ const BookshelfPage: React.FC = () => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          overflow: 'hidden',
+          overflow: 'clip',
         }}
       >
         <div
           style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundImage: 'url(/bookshelf/pixel_wood.png)',
-            backgroundRepeat: 'repeat',
-            backgroundSize: '540px',
+            position: 'fixed',
+            top: '-10%',
+            left: '-5%',
+            width: '110%',
+            height: '120%',
+            backgroundImage: 'url(/bookshelf/purple_pixel_sunset.png)',
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
             imageRendering: 'pixelated',
-            filter: 'contrast(0.7) brightness(1.1) saturate(0.8)',
             zIndex: 0,
           }}
         />
@@ -97,14 +99,29 @@ const BookshelfPage: React.FC = () => {
                 style={{
                   minHeight: 'clamp(47px, 6.7vw, 73px)',
                   display: 'flex',
-                  alignItems: 'flex-end',
-                  justifyContent: 'center',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
                   padding: '0 1rem',
                   marginBottom: '-100px',
                   position: 'relative',
                   zIndex: 1,
                 }}
               >
+                <span
+                  style={{
+                    fontFamily: "'Press Start 2P', monospace",
+                    fontSize: 'clamp(0.675rem, 1.5vw, 0.975rem)',
+                    color: '#ffffff',
+                    textAlign: 'center',
+                    marginBottom: '0.5rem',
+                    textShadow: '1px 1px 0 rgba(0,0,0,0.8)',
+                    lineHeight: 1.4,
+                    maxWidth: '160px',
+                  }}
+                >
+                  {shelf.alt}
+                </span>
                 <ComicBook
                   imageSrc={shelf.imageSrc}
                   href={shelf.href}

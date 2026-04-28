@@ -7,6 +7,10 @@ import CodeProjectsPage from './pages/CodeProjectPage';
 import VesselBluePage from './pages/VesselBluePage';
 import WheelTestPage from './pages/WheelTestPage';
 import BookshelfPage from './pages/BookshelfPage';
+import MillenniaMuseumPage from './pages/MillenniaMuseumPage';
+import MemoryWavesPage from './pages/MemoryWavesPage';
+import FlotsamJetsamPage from './pages/FlotsamJetsamPage';
+import QingmingJiePage from './pages/QingmingJiePage';
 import './index.css';
 
 function App() {
@@ -22,6 +26,10 @@ function App() {
             <Route path="/vessel_blue" element={<VesselBluePage />} />
             <Route path="/wheel" element={<WheelTestPage />} />
             <Route path="/bookshelf" element={<BookshelfPage />} />
+            <Route path="/millennia_museum" element={<MillenniaMuseumPage />} />
+            <Route path="/memory_waves" element={<MemoryWavesPage />} />
+            <Route path="/flotsam_jetsam" element={<FlotsamJetsamPage />} />
+            <Route path="/qingming_jie" element={<QingmingJiePage />} />
           </Routes>
         </main>
       </div>
