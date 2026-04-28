@@ -6,6 +6,7 @@ import ArtPortfolioPage from './pages/ArtPortfolioPage';
 import CodeProjectsPage from './pages/CodeProjectPage';
 import VesselBluePage from './pages/VesselBluePage';
 import WheelTestPage from './pages/WheelTestPage';
+import BookshelfPage from './pages/BookshelfPage';
 import './index.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route path="/code" element={<CodeProjectsPage />} />
             <Route path="/vessel_blue" element={<VesselBluePage />} />
             <Route path="/wheel" element={<WheelTestPage />} />
+            <Route path="/bookshelf" element={<BookshelfPage />} />
           </Routes>
         </main>
       </div>
