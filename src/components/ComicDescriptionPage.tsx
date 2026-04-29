@@ -3,6 +3,8 @@ import Footer from './Footer';
 
 interface ComicDescriptionPageProps {
   title: string;
+  subtitle?: string;
+  date?: string;
   label?: string;
   tagline?: string;
   descriptions: string[];
@@ -14,6 +16,8 @@ interface ComicDescriptionPageProps {
 
 const ComicDescriptionPage: React.FC<ComicDescriptionPageProps> = ({
   title,
+  subtitle,
+  date,
   label,
   tagline,
   descriptions,
@@ -27,8 +31,9 @@ const ComicDescriptionPage: React.FC<ComicDescriptionPageProps> = ({
       <section className="comic-desc">
         <div className="comic-desc__layout container">
           <div className="comic-desc__text">
-            {label && <p className="comic-desc__label">{label}</p>}
+            {subtitle && <p className="comic-desc__label">{subtitle}</p>}
             <h1 className="comic-desc__title">{title}</h1>
+            {date && <p className="comic-desc__label">{date}</p>}
             <div className="accent-line" style={{ marginBottom: '1.5rem' }} />
             {tagline && <p className="comic-desc__tagline">{tagline}</p>}
             {descriptions.map((text, i) => (
