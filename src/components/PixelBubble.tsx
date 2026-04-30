@@ -1,17 +1,20 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
 
 interface PixelBubbleProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   size?: number;
   pixelSize?: number;
+  seed?: number;
 }
 
 const PixelBubble: React.FC<PixelBubbleProps> = ({
   children,
   size = 200,
   pixelSize = 5,
+  seed,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const hueOffset = useMemo(() => seed !== undefined ? seed : Math.random() * Math.PI * 2, [seed]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -45,6 +48,31 @@ const PixelBubble: React.FC<PixelBubbleProps> = ({
       }
     }
 
+    // Iridescent oil-slick sheen
+    for (let x = 0; x < res; x++) {
+      for (let y = 0; y < res; y++) {
+        const dx = x - cx;
+        const dy = y - cy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist <= r && dist > r * 0.4) {
+          const normDist = dist / r;
+          const angle = Math.atan2(dy, dx);
+          const wave = normDist * 12 + angle * 2;
+
+          const rr = Math.sin(wave + hueOffset) * 0.5 + 0.5;
+          const gg = Math.sin(wave + hueOffset + 2.1) * 0.5 + 0.5;
+          const bb = Math.sin(wave + hueOffset + 4.2) * 0.5 + 0.5;
+
+          const edgeFade = Math.pow((normDist - 0.4) / 0.6, 0.8);
+          const alpha = edgeFade * 0.12;
+
+          ctx.fillStyle = `rgba(${Math.round(rr * 255)},${Math.round(gg * 255)},${Math.round(bb * 255)},${alpha})`;
+          ctx.fillRect(x, y, 1, 1);
+        }
+      }
+    }
+
     // Highlight near bottom-right
     const hx = cx + r * 0.3;
     const hy = cy + r * 0.35;
@@ -68,7 +96,7 @@ const PixelBubble: React.FC<PixelBubbleProps> = ({
     ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
     ctx.fillRect(sx, sy, 1, 1);
 
-  }, [size, pixelSize]);
+  }, [size, pixelSize, hueOffset]);
 
   return (
     <div
