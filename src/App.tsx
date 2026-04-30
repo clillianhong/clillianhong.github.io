@@ -11,6 +11,7 @@ import MillenniaMuseumPage from './pages/MillenniaMuseumPage';
 import MemoryWavesPage from './pages/MemoryWavesPage';
 import FlotsamJetsamPage from './pages/FlotsamJetsamPage';
 import QingmingJiePage from './pages/QingmingJiePage';
+import OceanTestPage from './pages/OceanTestPage';
 import './index.css';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/memory_waves" element={<MemoryWavesPage />} />
             <Route path="/flotsam_jetsam" element={<FlotsamJetsamPage />} />
             <Route path="/qingming_jie" element={<QingmingJiePage />} />
+            <Route path="/ocean" element={<OceanTestPage />} />
           </Routes>
         </main>
       </div>
