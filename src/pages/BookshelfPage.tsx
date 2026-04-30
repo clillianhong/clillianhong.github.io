@@ -4,12 +4,12 @@ import OceanBackground from '../components/OceanBackground';
 import PixelBubble from '../components/PixelBubble';
 
 const shelves = [
-  { imageSrc: '/project_title_cards/comics/vessel_blue_cover.png', href: '/vessel_blue', alt: 'Vessel Blue' },
-  { imageSrc: '/project_title_cards/comics/millennia_museum_cover.png', href: '/millennia_museum', alt: 'Millennia Museum' },
-  { imageSrc: '/project_title_cards/comics/memory_waves_2.jpg', href: '/memory_waves', alt: 'Memory Waves' },
+  { imageSrc: '/project_title_cards/comics/vessel_blue_cover.png', href: '/vessel_blue', alt: 'Vessel Blue', summary: 'A pirate and an artist entangled by magic and obsession in the fading Ming dynasty.' },
+  { imageSrc: '/project_title_cards/comics/millennia_museum_cover.png', href: '/millennia_museum', alt: 'Millennia Museum', summary: 'Two ancient enemies fall through time into a museum exhibiting their own past.' },
+  { imageSrc: '/project_title_cards/comics/memory_waves_2.jpg', href: '/memory_waves', alt: 'Memory Waves', summary: 'A reincarnated empress encounters a museum exhibit about her ancient deeds.' },
   null,
-  { imageSrc: '/project_title_cards/comics/flotsam_jetsam_comic.png', href: '/flotsam_jetsam', alt: 'Flotsam, Jetsam' },
-  { imageSrc: '/project_title_cards/comics/qingmingjie_plate.png', href: '/qingming_jie', alt: 'Rose Medallion Qingming Jie' },
+  { imageSrc: '/project_title_cards/comics/flotsam_jetsam_comic.png', href: '/flotsam_jetsam', alt: 'Flotsam, Jetsam', summary: 'A loyal servant journeys to the underworld to save a fallen princess - inspired by Nüwa of the Chinese creation myth.' },
+  { imageSrc: '/project_title_cards/comics/qingmingjie_plate.png', href: '/qingming_jie', alt: 'Rose Medallion Qingming Jie', summary: 'A plate-shaped comic about celebrating Qingming Jie with family.' },
 ];
 
 const DRIFT_PARAMS = [
@@ -147,7 +147,7 @@ const BookshelfPage: React.FC = () => {
                     animationDuration: DRIFT_PARAMS[i]?.dur || '8s',
                   }}
                 >
-                  <PixelBubble size={275}>
+                  <PixelBubble size={275} hoverLabel={shelf.summary} speechPosition={i < 3 ? 'below' : 'above'}>
                     <span
                       style={{
                         fontFamily: "'Press Start 2P', monospace",

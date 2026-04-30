@@ -28,7 +28,7 @@ const OceanBackground: React.FC<OceanBackgroundProps> = ({ showControls: externa
   });
 
   const [pixelSize, setPixelSize] = useState(4);
-  const [waveSpeed, setWaveSpeed] = useState(0.9);
+  const [waveSpeed, setWaveSpeed] = useState(1.5);
   const [waveHeight, setWaveHeight] = useState(2.2);
   const [surfaceY, setSurfaceY] = useState(0.4);
   const [rippleFreq, setRippleFreq] = useState(1.0);
@@ -40,7 +40,7 @@ const OceanBackground: React.FC<OceanBackgroundProps> = ({ showControls: externa
   const [fishHeight, setFishHeight] = useState(9);
   const [fishRoundness, setFishRoundness] = useState(0.6);
   const [fishColor, setFishColor] = useState('#f4a83d');
-  const [fishSpeed, setFishSpeed] = useState(0.02);
+  const [fishSpeed, setFishSpeed] = useState(0.005);
   const [panelOpen, setPanelOpen] = useState(false);
 
   paramsRef.current = { pixelSize, waveSpeed, waveHeight, surfaceY, rippleFreq, rippleThreshold, depthFade, showFoam, fishLength, fishHeight, fishRoundness, fishColor, fishSpeed };
