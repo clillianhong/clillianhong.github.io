@@ -1,5 +1,7 @@
 import React from 'react';
 import ComicBook from '../components/ComicBook';
+import OceanBackground from '../components/OceanBackground';
+import PixelBubble from '../components/PixelBubble';
 
 const shelves = [
   { imageSrc: '/project_title_cards/comics/vessel_blue_cover.png', href: '/vessel_blue', alt: 'Vessel Blue' },
@@ -61,21 +63,7 @@ const BookshelfPage: React.FC = () => {
           overflow: 'clip',
         }}
       >
-        <div
-          style={{
-            position: 'fixed',
-            top: '-10%',
-            left: '-5%',
-            width: '110%',
-            height: '120%',
-            backgroundImage: 'url(/bookshelf/blue_bg_pixel.jpg)',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            imageRendering: 'pixelated',
-            zIndex: 0,
-          }}
-        />
+        <OceanBackground />
         <div
           className="bookshelf-grid"
           style={{
@@ -95,29 +83,18 @@ const BookshelfPage: React.FC = () => {
                 alignItems: 'center',
               } as React.CSSProperties}
             >
-              <div
-                style={{
-                  minHeight: 'clamp(47px, 6.7vw, 73px)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'flex-end',
-                  padding: '0 1rem',
-                  marginBottom: '-100px',
-                  position: 'relative',
-                  zIndex: 1,
-                }}
-              >
+              <PixelBubble size={275}>
                 <span
                   style={{
                     fontFamily: "'Press Start 2P', monospace",
-                    fontSize: 'clamp(0.675rem, 1.5vw, 0.975rem)',
+                    fontSize: 'clamp(0.5rem, 1vw, 0.7rem)',
                     color: '#ffffff',
                     textAlign: 'center',
-                    marginBottom: '0.5rem',
+                    marginBottom: '0.4rem',
                     textShadow: '1px 1px 0 rgba(0,0,0,0.8)',
                     lineHeight: 1.4,
-                    maxWidth: '160px',
+                    maxWidth: '130px',
+                    display: 'block',
                   }}
                 >
                   {shelf.alt}
@@ -126,21 +103,9 @@ const BookshelfPage: React.FC = () => {
                   imageSrc={shelf.imageSrc}
                   href={shelf.href}
                   alt={shelf.alt}
+                  width="100px"
                 />
-              </div>
-              <img
-                src="/bookshelf/pixel_cloud.png"
-                alt=""
-                draggable={false}
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  display: 'block',
-                  imageRendering: 'pixelated',
-                  userSelect: 'none',
-                  transform: 'scaleY(-1)',
-                }}
-              />
+              </PixelBubble>
             </div>
           ))}
         </div>
