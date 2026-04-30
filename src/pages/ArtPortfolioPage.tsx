@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PortalHero from '../components/PortalHero';
 import ProjectCard from '../components/ProjectCard';
 import Footer from '../components/Footer';
+import PixelBubble from '../components/PixelBubble';
 import data from '../data/projects';
 
 const exhibitions = [
@@ -56,6 +58,45 @@ const ArtPortfolioPage: React.FC = () => {
 
   return (
     <>
+      <style>{`
+        @keyframes art-bubble-drift {
+          0%   { transform: translate(0, 0); }
+          12%  { transform: translate(30vw, 15vh); }
+          28%  { transform: translate(-20vw, 40vh); }
+          42%  { transform: translate(25vw, -10vh); }
+          58%  { transform: translate(-30vw, 25vh); }
+          72%  { transform: translate(15vw, -20vh); }
+          88%  { transform: translate(-10vw, -15vh); }
+          100% { transform: translate(0, 0); }
+        }
+      `}</style>
+      <Link
+        to="/bookshelf"
+        style={{
+          position: 'fixed',
+          top: '30%',
+          left: '40%',
+          zIndex: 5,
+          textDecoration: 'none',
+          animation: 'art-bubble-drift 31s ease-in-out infinite',
+        }}
+      >
+        <PixelBubble size={240} seed={2.5} borderWidth={3}>
+          <span
+            style={{
+              fontFamily: "'Press Start 2P', monospace",
+              fontSize: '0.825rem',
+              color: '#ffffff',
+              textShadow: '-1px -1px 0 #1a1a1a, 1px -1px 0 #1a1a1a, -1px 1px 0 #1a1a1a, 1px 1px 0 #1a1a1a',
+              textAlign: 'center',
+              lineHeight: 1.6,
+              maxWidth: '140px',
+            }}
+          >
+            enter the comics ocean
+          </span>
+        </PixelBubble>
+      </Link>
       <PortalHero />
 
       <section

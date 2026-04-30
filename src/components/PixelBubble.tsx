@@ -8,6 +8,7 @@ interface PixelBubbleProps {
   seed?: number;
   hoverLabel?: string;
   speechPosition?: 'above' | 'below';
+  borderWidth?: number;
 }
 
 const PixelBubble: React.FC<PixelBubbleProps> = ({
@@ -17,6 +18,7 @@ const PixelBubble: React.FC<PixelBubbleProps> = ({
   seed,
   hoverLabel,
   speechPosition: fixedPosition,
+  borderWidth = 1.5,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const shimmerRef = useRef<HTMLCanvasElement>(null);
@@ -46,10 +48,10 @@ const PixelBubble: React.FC<PixelBubbleProps> = ({
         const dy = y - cy;
         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        if (dist <= r && dist > r - 1.5) {
+        if (dist <= r && dist > r - borderWidth) {
           ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
           ctx.fillRect(x, y, 1, 1);
-        } else if (dist <= r - 1.5 && dist > r - 2.5) {
+        } else if (dist <= r - borderWidth && dist > r - borderWidth - 1) {
           ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
           ctx.fillRect(x, y, 1, 1);
         }
@@ -104,7 +106,7 @@ const PixelBubble: React.FC<PixelBubbleProps> = ({
     ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
     ctx.fillRect(sx, sy, 1, 1);
 
-  }, [res, hueOffset]);
+  }, [res, hueOffset, borderWidth]);
 
   const drawShimmer = useCallback((time: number) => {
     const canvas = shimmerRef.current;
