@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import PixelFish from './PixelFish';
 
-const BG_TOP = [0x48, 0xa6, 0xa7];
-const BG_BOTTOM = [0x00, 0x6a, 0x71];
-const LIGHT_BLUE = [0x9A, 0xCB, 0xD0] as const;
+const BG_TOP = [0x53, 0x62, 0x9E];
+const BG_BOTTOM = [0x47, 0x34, 0x72];
+const LIGHT_BLUE = [0x87, 0xBA, 0xC3] as const;
 
 interface OceanBackgroundProps {
   showControls?: boolean;
